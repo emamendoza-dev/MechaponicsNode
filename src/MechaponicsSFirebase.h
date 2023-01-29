@@ -1,0 +1,185 @@
+#include <FirebaseESP32.h>
+
+// Definiciones del proyecto en Firebase y el token de autenticacion como llave
+#define FIREBASE_HOST "mechaponicssystem-default-rtdb.firebaseio.com"
+#define FIREBASE_AUTH "ri9eXeF41NCanBQ4EsqQc097AOrUaYFQWYurJJvu"
+
+//Objeto de tipo Firebase
+FirebaseData firebaseData;
+
+// Nombre del Path principal del proyecto
+String pathS = "/MechaponicsSystem";
+// Nombre del Path principal del proyecto
+String pathN = "/Nodo1";
+
+// Variables a transmitir a la base de datos
+float n1pH = 0;
+float n1CE = 0;
+float n1Temp = 0;
+int n1NT = 0;
+int n1NSN = 0;
+int n1NAcd = 0;
+int n1NBas = 0;
+int n1NAg = 0;
+
+void printResult(FirebaseData &data)
+{
+  if (data.dataType() == "int")
+    Serial.println(data.intData());
+  else if (data.dataType() == "float")
+    Serial.println(data.floatData(), 5);
+  else if (data.dataType() == "double")
+    printf("%.9lf\n", data.doubleData());
+  else if (data.dataType() == "boolean")
+    Serial.println(data.boolData() == 1 ? "true" : "false");
+  else if (data.dataType() == "string")
+    Serial.println(data.stringData());
+}
+
+void InformacionGet(void)
+{
+  Serial.println("Aprobado");
+  Serial.println("Ruta: " + firebaseData.dataPath());
+  Serial.println("Tipo: " + firebaseData.dataType());
+  Serial.println("ETag: " + firebaseData.ETag());
+  Serial.print("Valor: ");
+  printResult(firebaseData);
+  Serial.println("------------------------------------");
+  Serial.println();
+}
+
+void InformacionSet(void)
+{
+  Serial.println("Aprobado");
+  Serial.println("Ruta: " + firebaseData.dataPath());
+  Serial.println("Tipo: " + firebaseData.dataType());
+  Serial.println("ETag: " + firebaseData.ETag());
+  Serial.print("Valor: ");
+  printResult(firebaseData);
+  Serial.println("------------------------------------");
+  Serial.println();
+}
+
+void MostrarError(void)
+{
+  Serial.println("ERROR");
+  Serial.println("RAZON: " + firebaseData.errorReason());
+  Serial.println("------------------------------------");
+  Serial.println();
+}
+
+// Conectando a Firebase
+void connectFirebaseBD() {
+  //Conectando con Firebase
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+
+  // Reconectando WiFi
+  Firebase.reconnectWiFi(true);
+
+  //Tiempo de espera de lectura de la base de datos en 1 minuto (máximo 15 minutos)
+  Firebase.setReadTimeout(firebaseData, 1000 * 60);
+
+  //Tamaño y  tiempo de espera de escritura
+  //Tiny tiempo en ls
+  Firebase.setwriteSizeLimit(firebaseData, "tiny");
+}
+
+// Escribir datos en la base de datos en Firebase
+void writeFirebaseBD() {
+  Serial.println("------------------------------------");
+  Serial.println("  ACTUALIZAR EL ESTADO DE SISTEMA SN ");
+  // Sensor de pH
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable1", n1pH)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de CE
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable2", n1CE)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de CE
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable3", n1Temp)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de Nivel Tanque SN
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable4", n1NT)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de Nivel SN Madre
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable8", n1NSN)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de Nivel Acido
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable5", n1NAcd)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de Nivel Base
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable6", n1NBas)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+  // Sensor de Nivel Agua
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable7", n1NAg)) {
+    InformacionSet();
+  } else {
+    MostrarError();
+  }
+}
+
+// Leyendo datos de la base de datos en FIrebase
+void readFirebaseBD() {
+  Serial.println("------------------------------------");
+  Serial.println("  LEER EL ESTADO DEL NODO 1 ");
+  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable1")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable2")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable3")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable4")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable8")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable5")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable6")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable7")) {
+    InformacionGet();
+  } else {
+    MostrarError();
+  }
+}
