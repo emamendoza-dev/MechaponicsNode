@@ -10,7 +10,7 @@
 
 // GPIO LED
 const int ledWiFiPin = 2;
-const int ejemplo;
+const int ejemploOPS;
 
 // Serial2 pins of ESP32
 #define RXD2 16
