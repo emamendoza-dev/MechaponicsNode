@@ -1,16 +1,15 @@
 #include <Arduino.h>
 
 #include <WiFi.h>
-#include "MechaponicsSSPIFFS.h"
-#include "MechaponicsSWiFiManager.h"
-#include "MechaponicsSFirebase.h"
-#include "MechaponicsSUART.h"
+#include "MechaponicsSSPIFFS.hpp"
+#include "MechaponicsSWiFiManager.hpp"
+#include "MechaponicsSFirebase.hpp"
+#include "MechaponicsSUART.hpp"
 
 //--------------------------------Pines
 
 // GPIO LED
 const int ledWiFiPin = 2;
-const int ejemploOPS;
 
 // Serial2 pins of ESP32
 #define RXD2 16
