@@ -1,14 +1,6 @@
-#include <ArduinoJson.h>
-#include <SPI.h>
-#include <Wire.h>
-
-// Variables a transmitir vía UART
-int board = 1;
-String message = "";
-bool messageReady = false;
-
 // Inicialización del puerto serie
-void initUART() {
+void initUART()
+{
   if (Serial2.available())
   {
     Serial.println("Mensaje recibido");
@@ -17,7 +9,8 @@ void initUART() {
   }
 }
 
-void writeUART() {
+void writeUART()
+{
   String json;
 
   StaticJsonDocument<192> doc;
@@ -36,11 +29,11 @@ void writeUART() {
 
   Serial.println(json);
   Serial2.println(json);
-
 }
 
 // Recepción de datos por el puerto serie
-void readUART() {
+void readUART()
+{
   if (messageReady)
   {
     DynamicJsonDocument doc(1024);

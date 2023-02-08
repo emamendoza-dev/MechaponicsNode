@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include <WiFi.h>
+#include "MechaponicsSConfig.hpp"
 #include "MechaponicsSSPIFFS.hpp"
 #include "MechaponicsSWiFiManager.hpp"
 #include "MechaponicsSFirebase.hpp"
@@ -16,7 +16,8 @@ const int ledWiFiPin = 2;
 #define TXD2 17
 
 //--------------------------------Configuracion en el setup
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
 
@@ -33,7 +34,8 @@ void setup() {
   Serial.println(pass);
 
   // Verificando conexión a la red o establecimiento del AP
-  if (initWiFi()) {
+  if (initWiFi())
+  {
     // Encendiendo led para mostrar conexión WiFi establecida
     digitalWrite(ledWiFiPin, HIGH);
     Serial.println("Conectado a la red");
@@ -77,18 +79,20 @@ void setup() {
     // Lectura de datos
     readFirebaseBD();
   }
-  else {
+  else
+  {
     // Conexión con el punto de acceso
     connectWiFiServer();
   }
 }
 
 //--------------------------------Configuracion en el loop
-void loop() {
+void loop()
+{
   // Envío de datos en formato JSON por el puerto serie
   writeUART();
   delay(5000);
-   // Comunicación UART para envío de datos del Nodo 1
-  //initUART();
-  //readUART();
+  // Comunicación UART para envío de datos del Nodo 1
+  // initUART();
+  // readUART();
 }

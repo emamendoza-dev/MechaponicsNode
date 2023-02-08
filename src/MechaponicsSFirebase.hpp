@@ -1,27 +1,3 @@
-#include <FirebaseESP32.h>
-
-// Definiciones del proyecto en Firebase y el token de autenticacion como llave
-#define FIREBASE_HOST "mechaponicssystem-default-rtdb.firebaseio.com"
-#define FIREBASE_AUTH "ri9eXeF41NCanBQ4EsqQc097AOrUaYFQWYurJJvu"
-
-//Objeto de tipo Firebase
-FirebaseData firebaseData;
-
-// Nombre del Path principal del proyecto
-String pathS = "/MechaponicsSystem";
-// Nombre del Path principal del proyecto
-String pathN = "/Nodo1";
-
-// Variables a transmitir a la base de datos
-float n1pH = 0;
-float n1CE = 0;
-float n1Temp = 0;
-int n1NT = 0;
-int n1NSN = 0;
-int n1NAcd = 0;
-int n1NBas = 0;
-int n1NAg = 0;
-
 void printResult(FirebaseData &data)
 {
   if (data.dataType() == "int")
@@ -69,117 +45,168 @@ void MostrarError(void)
 }
 
 // Conectando a Firebase
-void connectFirebaseBD() {
-  //Conectando con Firebase
+void connectFirebaseBD()
+{
+  // Conectando con Firebase
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 
   // Reconectando WiFi
   Firebase.reconnectWiFi(true);
 
-  //Tiempo de espera de lectura de la base de datos en 1 minuto (máximo 15 minutos)
+  // Tiempo de espera de lectura de la base de datos en 1 minuto (máximo 15 minutos)
   Firebase.setReadTimeout(firebaseData, 1000 * 60);
 
-  //Tamaño y  tiempo de espera de escritura
-  //Tiny tiempo en ls
+  // Tamaño y  tiempo de espera de escritura
+  // Tiny tiempo en ls
   Firebase.setwriteSizeLimit(firebaseData, "tiny");
 }
 
 // Escribir datos en la base de datos en Firebase
-void writeFirebaseBD() {
+void writeFirebaseBD()
+{
   Serial.println("------------------------------------");
   Serial.println("  ACTUALIZAR EL ESTADO DE SISTEMA SN ");
   // Sensor de pH
-  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable1", n1pH)) {
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable1", n1pH))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de CE
-  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable2", n1CE)) {
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable2", n1CE))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de CE
-  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable3", n1Temp)) {
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable3", n1Temp))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de Nivel Tanque SN
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable4", n1NT)) {
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable4", n1NT))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de Nivel SN Madre
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable8", n1NSN)) {
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable8", n1NSN))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de Nivel Acido
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable5", n1NAcd)) {
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable5", n1NAcd))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de Nivel Base
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable6", n1NBas)) {
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable6", n1NBas))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
   // Sensor de Nivel Agua
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable7", n1NAg)) {
+  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable7", n1NAg))
+  {
     InformacionSet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
 }
 
 // Leyendo datos de la base de datos en FIrebase
-void readFirebaseBD() {
+void readFirebaseBD()
+{
   Serial.println("------------------------------------");
   Serial.println("  LEER EL ESTADO DEL NODO 1 ");
-  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable1")) {
+  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable1"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable2")) {
+  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable2"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable3")) {
+  if (Firebase.getFloat(firebaseData, pathS + pathN + "/Variable3"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable4")) {
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable4"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable8")) {
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable8"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable5")) {
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable5"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable6")) {
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable6"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
-  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable7")) {
+  if (Firebase.getInt(firebaseData, pathS + pathN + "/Variable7"))
+  {
     InformacionGet();
-  } else {
+  }
+  else
+  {
     MostrarError();
   }
 }
