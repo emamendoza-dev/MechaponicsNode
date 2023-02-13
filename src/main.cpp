@@ -5,6 +5,8 @@
 #include "MechaponicsSWiFiManager.hpp"
 #include "MechaponicsSFirebase.hpp"
 #include "MechaponicsSUART.hpp"
+#include "MechaponicsSMicroSD.hpp"
+#include "MechaponicsSPrepareSN.hpp"
 
 //--------------------------------Pines
 
@@ -22,6 +24,7 @@ void setup()
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
 
   initSPIFFS();
+  initPrepareSN();
 
   // GPIO 2 como OUTPUT
   pinMode(ledWiFiPin, OUTPUT);

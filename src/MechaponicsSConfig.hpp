@@ -4,6 +4,8 @@
 #include <AsyncTCP.h>
 #include <FirebaseESP32.h>
 #include <ArduinoJson.h>
+#include "FS.h"
+#include "SD.h"
 #include <SPI.h>
 #include <Wire.h>
 
@@ -37,6 +39,20 @@ FirebaseData firebaseData;
 String pathS = "/MechaponicsSystem";
 // Nombre del Path principal del proyecto
 String pathN = "/Nodo1";
+
+#define PATH_SD_PROFILE_SN "/profile/node1_profile.txt"
+#define PATH_SD_DATALOG_SN "/datalog/node1_datalog.txt"
+
+#define SENSOR_LEVEL_SN_TRIG 32
+#define SENSOR_LEVEL_SN_ECHO 35
+
+#define LEVEL_TANK_SN_OFFSET 10
+#define LEVEL_TANK_SN_MIN 40
+#define LEVEL_TANK_SN_MAX 30
+
+#define SENSOR_LEVEL_SA 36
+#define SENSOR_LEVEL_SB 39
+#define SENSOR_LEVEL_SNM 34
 
 // Variables a transmitir a la base de datos
 float n1pH = 0;
