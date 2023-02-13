@@ -1,5 +1,5 @@
-#include "PrepareSNSensorLevelTank.hpp"
-#include "PrepareSNSensorsBuffer.hpp"
+#include "prepareSN/PrepareSNSensorLevelTank.hpp"
+#include "prepareSN/PrepareSNSensorsBuffer.hpp"
 
 bool flagWiFi;
 bool flagOnOffLine;
