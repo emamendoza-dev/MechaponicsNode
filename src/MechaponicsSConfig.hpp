@@ -48,6 +48,7 @@ String pathN = "/Nodo1";
 
 #define LEVEL_TANK_SN_OFFSET 10
 #define LEVEL_TANK_SN_MIN 40
+#define LEVEL_TANK_SN_FULL 95
 #define LEVEL_TANK_SN_MAX 30
 
 #define SENSOR_LEVEL_SA 36

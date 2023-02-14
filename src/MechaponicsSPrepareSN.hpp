@@ -2,6 +2,8 @@
 #include "prepareSN/PrepareSNSensorsBuffer.hpp"
 #include "prepareSN/PrepareSNLoadProfile.hpp"
 #include "prepareSN/PrepareSNSaveDatalog.hpp"
+#include "prepareSN/PrepareSNFillTankSN.hpp"
+#include "prepareSN/PrepareSNDosePump.hpp"
 
 bool flagWiFi;
 bool flagOnOffLine;
@@ -12,29 +14,14 @@ void initPrepareSN()
     initLoadProfile();
     initSensorLevelSN();
     initSensorsLevelBuffer();
-}
-
-void fillTankSN()
-{
-    bool flagLevelContainers = measureLevelContainers();
-
-    do
-    {
-        flagLevelSN = measureLevelSN();
-
-        // Code for fill Tank SN
-
-    } while (flagLevelContainers && flagLevelSN);
+    initFillTankSN();
+    initDosePump();
 }
 
 float measurepHSN()
 {
 
     return 5.0;
-}
-
-void dose(int mode, float valReference)
-{
 }
 
 void regulatepHSN(float valpHDown, float valpHUp)
@@ -56,7 +43,7 @@ void regulatepHSN(float valpHDown, float valpHUp)
         else
         {
             flagStatuspHSN = false;
-            dose(1, valLevelSNpH);
+            dose(0, PWM_SPEED_BUFFER_SA, TIME_ACTIVATION_PUMP_SA);
         }
     } while (!(flagLevelContainers && flagStatuspHSN));
 }
@@ -86,7 +73,7 @@ void regulateECSN(float valECDown, float valECUp)
         else
         {
             flagStatusECSN = false;
-            dose(1, valLevelSNEC);
+            dose(2, PWM_SPEED_BUFFER_SA, TIME_ACTIVATION_PUMP_SNM);
         }
     } while (!(flagLevelContainers && flagStatusECSN));
 }
@@ -106,13 +93,13 @@ bool prepareSN()
     Serial.println(F("Loading configuration..."));
     loadConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
 
-    bool flagLevelContainers = measureLevelContainers();
-
-    fillTankSN();
+    fillTankSN(LEVEL_TANK_SN_MIN);
 
     regulatepHSN(cProfileSN.valpHDown, cProfileSN.valpHUp);
 
     regulateECSN(cProfileSN.valECDown, cProfileSN.valECUp);
+
+    fillTankSN(LEVEL_TANK_SN_FULL);
 
     Serial.println(F("Saving datalog..."));
     saveParametersSN(PATH_SD_DATALOG_SN, sParametersSN);
