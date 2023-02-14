@@ -1,13 +1,15 @@
 #include "prepareSN/PrepareSNSensorLevelTank.hpp"
 #include "prepareSN/PrepareSNSensorsBuffer.hpp"
+#include "prepareSN/PrepareSNLoadProfile.hpp"
+#include "prepareSN/PrepareSNSaveDatalog.hpp"
 
 bool flagWiFi;
 bool flagOnOffLine;
 bool flagLevelSN;
 
-float valpHUp, valpHDown, valECUp, valECDown;
-
-void initPrepareSN(){
+void initPrepareSN()
+{
+    initLoadProfile();
     initSensorLevelSN();
     initSensorsLevelBuffer();
 }
@@ -101,15 +103,17 @@ bool prepareSN()
         flagOnOffLine = false;
     }
 
-    readDataSD(0);
+    Serial.println(F("Loading configuration..."));
+    loadConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
 
     bool flagLevelContainers = measureLevelContainers();
 
     fillTankSN();
 
-    regulatepHSN(valpHDown, valpHUp);
+    regulatepHSN(cProfileSN.valpHDown, cProfileSN.valpHUp);
 
-    regulateECSN(valECDown, valECUp);
+    regulateECSN(cProfileSN.valECDown, cProfileSN.valECUp);
 
-    writeDataSD(0, "Mensaje de prueba");
+    Serial.println(F("Saving datalog..."));
+    saveParametersSN(PATH_SD_DATALOG_SN, sParametersSN);
 }
