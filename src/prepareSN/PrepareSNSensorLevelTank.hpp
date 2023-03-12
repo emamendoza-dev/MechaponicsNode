@@ -1,16 +1,8 @@
-struct sensorLevelSN {
-  long timeDelayEcho;
-  long distanceEquivalent;
-  int levelPercentageTank;
-};
+// Struct statement for sensor level
 
-sensorLevelSN sLevelSN = {0, 0, 100.0};
+sensorLevelSN sLevelSN = {0, 0, 100};
 
-void initSensorLevelSN() {
-  pinMode(SENSOR_LEVEL_SN_TRIG, OUTPUT);
-  pinMode(SENSOR_LEVEL_SN_ECHO, INPUT);
-  digitalWrite(SENSOR_LEVEL_SN_TRIG, LOW);
-}
+// Function for measure level of tank SN
 
 int measureLevelSN()
 {
@@ -22,7 +14,16 @@ int measureLevelSN()
   sLevelSN.timeDelayEcho = pulseIn(SENSOR_LEVEL_SN_ECHO, HIGH);
   sLevelSN.distanceEquivalent = sLevelSN.timeDelayEcho / 59;
 
-  sLevelSN.levelPercentageTank = ((LEVEL_TANK_SN_MAX - (sLevelSN.distanceEquivalent - LEVEL_TANK_SN_OFFSET)) * 100 ) / LEVEL_TANK_SN_MAX;
+  sLevelSN.levelPercentageTank = ((LEVEL_TANK_SN_MAX - (sLevelSN.distanceEquivalent - LEVEL_TANK_SN_OFFSET)) * 100) / LEVEL_TANK_SN_MAX;
 
   return sLevelSN.levelPercentageTank;
+}
+
+// Function configuration for sensor level SN
+
+void initSensorLevelSN()
+{
+  pinMode(SENSOR_LEVEL_SN_TRIG, OUTPUT);
+  pinMode(SENSOR_LEVEL_SN_ECHO, INPUT);
+  digitalWrite(SENSOR_LEVEL_SN_TRIG, LOW);
 }

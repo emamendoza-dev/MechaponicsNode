@@ -5,8 +5,10 @@
 #include "MechaponicsSWiFiManager.hpp"
 #include "MechaponicsSFirebase.hpp"
 #include "MechaponicsSUART.hpp"
-#include "MechaponicsSMicroSD.hpp"
+//#include "MechaponicsSMicroSD.hpp"
 #include "MechaponicsSPrepareSN.hpp"
+
+/*
 
 //--------------------------------Pines
 
@@ -17,10 +19,13 @@ const int ledWiFiPin = 2;
 #define RXD2 16
 #define TXD2 17
 
+*/
+
 //--------------------------------Configuracion en el setup
 void setup()
 {
   Serial.begin(115200);
+  /*
   Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
 
   initSPIFFS();
@@ -87,15 +92,22 @@ void setup()
     // Conexión con el punto de acceso
     connectWiFiServer();
   }
+  */
+
+ initPrepareSN();
 }
 
 //--------------------------------Configuracion en el loop
 void loop()
 {
+  /*
   // Envío de datos en formato JSON por el puerto serie
   writeUART();
   delay(5000);
   // Comunicación UART para envío de datos del Nodo 1
   // initUART();
   // readUART();
+  */
+  prepareSN();
+  delay(1000);
 }

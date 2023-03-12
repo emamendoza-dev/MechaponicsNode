@@ -1,39 +1,48 @@
-#define ACTUATOR_PUMP_SA 13
-#define ACTUATOR_PUMP_SB 12
-#define ACTUATOR_PUMP_SNM 14
+// Struct statement for buffer pump
 
-#define PWM_SPEED_BUFFER_SA 150
-#define PWM_SPEED_BUFFER_SB 150
-#define PWM_SPEED_BUFFER_SNM 200
+actuatorPumpMotor aPMBufferSA = {PWM_FRECUENCY_ACTUATOR, PWM_CHANNEL_SA, PWM_RESOLUTION_ACTUATOR, PWM_SPEED_BUFFER_SA};
+actuatorPumpMotor aPMBufferSB = {PWM_FRECUENCY_ACTUATOR, PWM_CHANNEL_SB, PWM_RESOLUTION_ACTUATOR, PWM_SPEED_BUFFER_SB};
+actuatorPumpMotor aPMBufferSNM = {PWM_FRECUENCY_ACTUATOR, PWM_CHANNEL_SNM, PWM_RESOLUTION_ACTUATOR, PWM_SPEED_BUFFER_SNM};
 
-#define TIME_ACTIVATION_PUMP_SA 500
-#define TIME_ACTIVATION_PUMP_SB 500
-#define TIME_ACTIVATION_PUMP_SNM 2000
+// Function for buffer dose, It is dosed by time
 
-void dose(int actuatorActivation, int pwmSpeedBuffer, uint32_t timeDosePump)
+void dose(int actuatorActivation, uint32_t timeDosePump)
 {
     switch (actuatorActivation)
     {
     case 0:
-        analogWrite(ACTUATOR_PUMP_SA, pwmSpeedBuffer);
+        ledcWrite(aPMBufferSA.channelPWM, aPMBufferSA.dutyCyclePWM);
         delay(timeDosePump);
+        ledcWrite(aPMBufferSA.channelPWM, 0);
         break;
     case 1:
-        analogWrite(ACTUATOR_PUMP_SB, pwmSpeedBuffer);
+        ledcWrite(aPMBufferSB.channelPWM, aPMBufferSB.dutyCyclePWM);
         delay(timeDosePump);
+        ledcWrite(aPMBufferSB.channelPWM, 0);
         break;
     case 2:
-        analogWrite(ACTUATOR_PUMP_SNM, pwmSpeedBuffer);
+        ledcWrite(aPMBufferSNM.channelPWM, aPMBufferSNM.dutyCyclePWM);
         delay(timeDosePump);
+        ledcWrite(aPMBufferSNM.channelPWM, 0);
         break;
     default:
         break;
     }
 }
 
+// Function configuration for actuators dose
+
 void initDosePump()
 {
     pinMode(ACTUATOR_PUMP_SA, OUTPUT);
+    ledcSetup(aPMBufferSA.channelPWM, aPMBufferSA.frecuencyPWM, aPMBufferSA.resolutionPWM);
+    ledcAttachPin(ACTUATOR_PUMP_SA, aPMBufferSA.channelPWM);
+
     pinMode(ACTUATOR_PUMP_SB, OUTPUT);
+    ledcSetup(aPMBufferSB.channelPWM, aPMBufferSB.frecuencyPWM, aPMBufferSB.resolutionPWM);
+    ledcAttachPin(ACTUATOR_PUMP_SB, aPMBufferSB.channelPWM);
+
     pinMode(ACTUATOR_PUMP_SNM, OUTPUT);
+    ledcSetup(aPMBufferSNM.channelPWM, aPMBufferSNM.frecuencyPWM, aPMBufferSNM.resolutionPWM);
+    ledcAttachPin(ACTUATOR_PUMP_SNM, aPMBufferSNM.channelPWM);
 }
