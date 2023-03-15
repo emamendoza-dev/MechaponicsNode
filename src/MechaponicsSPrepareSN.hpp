@@ -127,5 +127,5 @@ void prepareSN()
     dose(2, TIME_ACTIVATION_PUMP_SNM);
     Serial.println("Activando mezcladores");
     mixer(TIME_ACTIVATION_MOTOR_R);
-
+    measureLevelContainers();
 }

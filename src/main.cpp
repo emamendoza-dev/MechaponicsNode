@@ -108,7 +108,6 @@ void loop()
   // initUART();
   // readUART();
   */
-  // prepareSN();
-  measureLevelContainers();
+  prepareSN();
   delay(1000);
 }
