@@ -96,6 +96,8 @@ struct actuatorPumpMotor {
 
 #define SENSOR_LEVEL_SNM 34
 
+// OLD CONFIGURATION
+
 // Crear objeto AsyncWebServer en el puerto 80
 AsyncWebServer server(80);
 

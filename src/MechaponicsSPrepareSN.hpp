@@ -14,7 +14,7 @@ void initPrepareSN()
 {
     // initLoadProfile();
     initSensorLevelSN();
-    // initSensorsLevelBuffer();
+    initSensorsLevelBuffer();
     initFillTankSN();
     initDosePump();
     initMixer();
