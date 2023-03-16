@@ -5,6 +5,10 @@
 #include "prepareSN/PrepareSNFillTankSN.hpp"
 #include "prepareSN/PrepareSNDosePump.hpp"
 #include "prepareSN/PrepareSNMixerTank.hpp"
+#include "prepareSN/PrepareSNSensorCE.hpp"
+#include "prepareSN/PrepareSNSensorPH.hpp"
+#include "prepareSN/PrepareSNSensorTemperature.hpp"
+
 
 bool flagWiFi;
 bool flagOnOffLine;
@@ -18,6 +22,11 @@ void initPrepareSN()
     initFillTankSN();
     initDosePump();
     initMixer();
+
+    // PH, CE, temperature tests
+    initCESensor();
+    initPHSensor();
+    initTemperatureSensor();
 }
 
 /*
@@ -128,4 +137,17 @@ void prepareSN()
     Serial.println("Activando mezcladores");
     mixer(TIME_ACTIVATION_MOTOR_R);
     measureLevelContainers();
+
+    // PH, CE, temperature tests
+    float CELevel = measureLevelCEAveraged();
+    Serial.print("Nivel de CE: ");
+    Serial.println(CELevel);
+
+    float PHLevel = measureAveragedPHLevel();
+    Serial.print("Nivel de pH: ");
+    Serial.println(PHLevel);
+
+    float temperatureSNCentigrade = measureSNTemperature();
+    Serial.print("Temperatura de SN: ");
+    Serial.println(temperatureSNCentigrade);
 }
