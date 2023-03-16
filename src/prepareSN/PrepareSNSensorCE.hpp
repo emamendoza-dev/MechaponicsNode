@@ -50,9 +50,11 @@ float measureLevelCE() {
 
 float measureLevelCEAveraged() {
     float CELevel = 0.0;
-    for(int i=0; i<5; i++){
+    for(int i=0; i<10; i++){
+        Serial.println("Nivel de CE medido");
+        Serial.println(measureLevelCE());
         CELevel += measureLevelCE();
-        delay(1000);
+        delay(200);
     }
-    return CELevel/5.0;
+    return CELevel/10.0;
 }
