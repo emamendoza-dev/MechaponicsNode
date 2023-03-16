@@ -8,8 +8,30 @@
 #include "SD.h"
 #include <SPI.h>
 #include <Wire.h>
+#include <ph_grav.h>
+#include <OneWire.h>                
+#include <DallasTemperature.h>
+
 
 // PINOUT-CONFIG ACTUATORS AND SENSORS NODE1
+
+// CE SENSOR PINOUT AND GLOBAL VARIABLES
+
+#define SENSOR_CE_RX 9
+#define SENSOR_CE_TX 10
+String answerSensorCE = "";
+boolean answerSensorCEComplete = false;
+
+// PH SENSOR PINOUT AND GLOBAL INSTANCE
+
+#define SENSOR_PH_ANALOGIC_INPUT 33
+Gravity_pH pHSensor = Gravity_pH(SENSOR_PH_ANALOGIC_INPUT);
+
+// TEMPERATURE SENSOR PINOUT AND OBJECTS
+
+#define SENSOR_TEMPERATURE_SN_PIN 15 
+OneWire ourWireTemperatureSensor(SENSOR_TEMPERATURE_SN_PIN); 
+DallasTemperature temperatureSensor(&ourWireTemperatureSensor);
 
 // ULTRASONIC SENSOR PINOUT AND CONSTANS
 
