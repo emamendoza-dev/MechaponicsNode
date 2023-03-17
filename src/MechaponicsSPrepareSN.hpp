@@ -122,6 +122,7 @@ void prepareSN()
     saveParametersSN(PATH_SD_DATALOG_SN, sParametersSN);
     */
 
+/*
     Serial.println("LLenando almacén SN");
     int levelSN = measureLevelSN();
     Serial.println(levelSN);
@@ -137,17 +138,21 @@ void prepareSN()
     Serial.println("Activando mezcladores");
     mixer(TIME_ACTIVATION_MOTOR_R);
     measureLevelContainers();
-
+*/
     // PH, CE, temperature tests
-    float CELevel = measureLevelCEAveraged();
-    Serial.print("Nivel de CE: ");
+    float CELevelNoCompensation = measureLevelCEAveraged(25.0);
+    Serial.print("Nivel de CE sin compensación (uS/cm): ");
+    Serial.println(CELevelNoCompensation);
+
+    float temperatureSNCentigrade = measureSNTemperature();
+    Serial.print("Temperatura de SN (°C): ");
+    Serial.println(temperatureSNCentigrade);
+
+    float CELevel = measureLevelCEAveraged(temperatureSNCentigrade);
+    Serial.print("Nivel de CE con compensación (uS/cm): ");
     Serial.println(CELevel);
 
     float PHLevel = measureAveragedPHLevel();
     Serial.print("Nivel de pH: ");
     Serial.println(PHLevel);
-
-    float temperatureSNCentigrade = measureSNTemperature();
-    Serial.print("Temperatura de SN: ");
-    Serial.println(temperatureSNCentigrade);
 }
