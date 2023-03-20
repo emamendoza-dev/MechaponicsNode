@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <WiFi.h>
 #include "SPIFFS.h"
 #include <ESPAsyncWebServer.h>
@@ -11,7 +12,7 @@
 #include <ph_grav.h>
 #include <OneWire.h>                
 #include <DallasTemperature.h>
-
+#include <TaskScheduler.h>
 
 // PINOUT-CONFIG ACTUATORS AND SENSORS NODE1
 
@@ -106,53 +107,79 @@ struct actuatorPumpMotor {
   int dutyCyclePWM;
 };
 
-// SENSOR LEVEL SA PINTOUT AND CONSTANTS
+// SENSOR LEVEL SA PINOUT AND CONSTANTS
 
 #define SENSOR_LEVEL_SA 36
 
-// SENSOR LEVEL SB PINTOUT AND CONSTANTS
+// SENSOR LEVEL SB PINOUT AND CONSTANTS
 
 #define SENSOR_LEVEL_SB 39
 
-// SENSOR LEVEL SNM PINTOUT AND CONSTANTS
+// SENSOR LEVEL SNM PINOUT AND CONSTANTS
 
 #define SENSOR_LEVEL_SNM 34
 
-// OLD CONFIGURATION
+// WiFi PINOUT AND CONSTANTS
 
-// Crear objeto AsyncWebServer en el puerto 80
+// GPIO LED INDICATOR FOR WiFi
+
+#define INDICATOR_WIFI 2
+
+// GPIO UART PORT INIT
+
+#define PERIPHERAL_ESP8266_RXD1 16
+#define PERIPHERAL_ESP8266_TXD1 17
+
+// ASYNCWEBSERVER OBJECT ON PORT 80
+
 AsyncWebServer server(80);
 
-// Buscar parámetro en la solicitud HTTP POST
+// PARAMETER IN HTTP POST REQUEST
+
 const char *PARAM_INPUT_1 = "ssid";
 const char *PARAM_INPUT_2 = "pass";
 
-// Rutas de archivo para guardar los valores de entrada de forma permanente
+// FILE PATHS TO SAVE INPUT VALUES PERMANENTLY
+
 const char *ssidPath = "/ssid.txt";
 const char *passPath = "/pass.txt";
 
-// Variables para guardar valores del formulario HTML
+// VARIABLES TO STORE HTML FORM VALUES
+
 String ssid;
 String pass;
 
-// Variables de tiempo
-unsigned long previousMillis = 0;
-const long interval = 10000; // intervalo de espera para conexión Wi-Fi  (milliseconds)
+// VARIABLES OF TIME WIFI FUNCTION
 
-// Definiciones del proyecto en Firebase y el token de autenticacion como llave
+unsigned long previousMillis = 0;
+const long interval = 10000;
+
+// PROJECT DEFINITIONS IN FIREBASE AND THE AUTHENTICATION TOKEN AS A KEY
+
 #define FIREBASE_HOST "mechaponicssystem-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "ri9eXeF41NCanBQ4EsqQc097AOrUaYFQWYurJJvu"
 
-// Objeto de tipo Firebase
+// FIREBASE TYPE OBJECT
+
 FirebaseData firebaseData;
 
-// Nombre del Path principal del proyecto
+// FIREBASE TREE PATHS
+
 String pathS = "/MechaponicsSystem";
-// Nombre del Path principal del proyecto
+String pathStateMechaSystem = "/Estado";
 String pathN = "/Nodo1";
+
+// MICRO SD PATHS 
 
 #define PATH_SD_PROFILE_SN "/profile/node1_profile.txt"
 #define PATH_SD_DATALOG_SN "/datalog/node1_datalog.txt"
+
+// OPERATING MODE VARIABLES
+
+#define MODE_AUTOMATIC_VALUE 0
+#define MODE_DEMOSTRATIVE_VALUE 1
+
+int modeOperatingSystem = 0;
 
 // Variables a transmitir a la base de datos
 float n1pH = 0;

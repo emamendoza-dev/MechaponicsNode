@@ -210,3 +210,19 @@ void readFirebaseBD()
     MostrarError();
   }
 }
+
+void readStateMechaSystem(){
+  Serial.println("------------------------------------");
+  Serial.println("  LEER EL ESTADO DEL SISTEMA ");
+
+  if (Firebase.getInt(firebaseData, pathS + pathStateMechaSystem + "/Modo"))
+  {
+    modeOperatingSystem = firebaseData.to<int>();
+    //Serial.println(modeOperatingSystem);
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+}
