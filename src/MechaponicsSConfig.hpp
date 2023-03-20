@@ -9,6 +9,9 @@
 #include "SD.h"
 #include <SPI.h>
 #include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <Fonts/FreeSerif9pt7b.h>
 #include <ph_grav.h>
 #include <OneWire.h>                
 #include <DallasTemperature.h>
@@ -167,6 +170,7 @@ FirebaseData firebaseData;
 
 String pathS = "/MechaponicsSystem";
 String pathStateMechaSystem = "/Estado";
+String pathPerfilMechaSystem = "/Perfil";
 String pathN = "/Nodo1";
 
 // MICRO SD PATHS 
@@ -174,12 +178,30 @@ String pathN = "/Nodo1";
 #define PATH_SD_PROFILE_SN "/profile/node1_profile.txt"
 #define PATH_SD_DATALOG_SN "/datalog/node1_datalog.txt"
 
+// STRUCT CONFIGURATION PROFILE SN
+
+struct ConfigProfileSN {
+ float valpHUp;
+ float valpHDown;
+ float valECUp;
+ float valECDown;
+};
+
+ConfigProfileSN cProfileSN;
+
 // OPERATING MODE VARIABLES
 
 #define MODE_AUTOMATIC_VALUE 0
 #define MODE_DEMOSTRATIVE_VALUE 1
 
-int modeOperatingSystem = 0;
+int modeOperatingSystem = 2;
+
+// VARIABLES OLED DISPLAY
+
+#define OLED_WIDTH 128
+#define OLED_HIGH 32
+const uint8_t OLED_ADDRESS = 0X3C;
+const int8_t OLED_RESET = -1;
 
 // Variables a transmitir a la base de datos
 float n1pH = 0;

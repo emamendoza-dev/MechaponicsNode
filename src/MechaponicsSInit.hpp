@@ -1,19 +1,25 @@
 #include "MechaponicsSConfig.hpp"
+#include "MechaponicsSPrepareSN.hpp"
 #include "MechaponicsSSPIFFS.hpp"
 #include "MechaponicsSWiFiManager.hpp"
 #include "MechaponicsSFirebase.hpp"
 #include "MechaponicsSUART.hpp"
+#include "MechaponicsSOLED.hpp"
 // #include "MechaponicsSMicroSD.hpp"
-#include "MechaponicsSPrepareSN.hpp"
+
+Scheduler firebaseSchedulerState;
+
+Task TaskFirebaseState(10000, TASK_FOREVER, &readStateMechaSystem);
+Task TaskFirebasePerfil(15000, TASK_FOREVER, &readPerfilMechaSystem);
+Task TaskOLEDParameters(20000, TASK_FOREVER, &showParametersOLED);
 
 void initMechaponicsSystem()
 {
     Serial.begin(115200);
+    initOLED();
     initSerialPortUART();
     initSPIFFS();
     initWiFiIndicator();
-
-    // initPrepareSN();
 }
 
 void connectionWiFiOrServer()
@@ -39,12 +45,20 @@ void connectionWiFiOrServer()
         readStateMechaSystem();
 
         firebaseSchedulerState.addTask(TaskFirebaseState);
+        firebaseSchedulerState.addTask(TaskFirebasePerfil);
+        firebaseSchedulerState.addTask(TaskOLEDParameters);
+
 
         TaskFirebaseState.enable();
+        TaskFirebasePerfil.enable();
+        TaskOLEDParameters.enable();
+
+        initPrepareSN();
     }
     else
     {
         // Conexión con el punto de acceso
         connectWiFiServer();
     }
+    
 }

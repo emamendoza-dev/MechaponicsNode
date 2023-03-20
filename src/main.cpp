@@ -1,9 +1,5 @@
 #include "MechaponicsSInit.hpp"
 
-Scheduler firebaseSchedulerState;
-
-Task TaskFirebaseState(10000, TASK_FOREVER, &readStateMechaSystem);
-
 void setup()
 {
   initMechaponicsSystem();
@@ -11,7 +7,6 @@ void setup()
   connectionWiFiOrServer();
 }
 
-//--------------------------------Configuracion en el loop
 void loop()
 {
   firebaseSchedulerState.execute();
@@ -19,6 +14,21 @@ void loop()
   {
   case 0:
     Serial.println("Modo de operación automatico");
+
+    Serial.println(F("Loading configuration..."));
+    loadConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
+
+    // Dump config file
+    Serial.println(F("Print config file..."));
+    printFile(PATH_SD_PROFILE_SN);
+
+    Serial.println(cProfileSN.valpHUp);
+    Serial.println(cProfileSN.valpHDown);
+    Serial.println(cProfileSN.valECUp);
+    Serial.println(cProfileSN.valECDown);
+
+    showParametersOLED();
+
     delay(1000);
     break;
   case 1:

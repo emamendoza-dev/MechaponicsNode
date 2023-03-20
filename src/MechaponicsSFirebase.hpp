@@ -226,3 +226,33 @@ void readStateMechaSystem(){
     MostrarError();
   }
 }
+
+void readPerfilMechaSystem(){
+  Serial.println("------------------------------------");
+  Serial.println("  LEER EL PERFIL DEL SISTEMA ");
+
+  if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/pH"))
+  {
+    cProfileSN.valpHDown = firebaseData.to<float>() - 0.1;
+    cProfileSN.valpHUp = firebaseData.to<float>() + 0.1;
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/CE"))
+  {
+    cProfileSN.valECDown = firebaseData.to<float>() - 0.1;
+    cProfileSN.valECUp = firebaseData.to<float>() + 0.1;
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+
+  // Create configuration file
+    Serial.println(F("Saving configuration..."));
+    saveConfiguration(PATH_SD_PROFILE_SN, cProfileSN); 
+}

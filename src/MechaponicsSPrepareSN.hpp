@@ -1,6 +1,6 @@
 #include "prepareSN/PrepareSNSensorLevelTank.hpp"
 #include "prepareSN/PrepareSNSensorsBuffer.hpp"
-//#include "prepareSN/PrepareSNLoadProfile.hpp"
+#include "prepareSN/PrepareSNLoadProfile.hpp"
 //#include "prepareSN/PrepareSNSaveDatalog.hpp"
 #include "prepareSN/PrepareSNFillTankSN.hpp"
 #include "prepareSN/PrepareSNDosePump.hpp"
@@ -16,7 +16,7 @@ bool flagLevelSN;
 
 void initPrepareSN()
 {
-    // initLoadProfile();
+    initLoadProfile();
     initSensorLevelSN();
     initSensorsLevelBuffer();
     initFillTankSN();
@@ -30,11 +30,6 @@ void initPrepareSN()
 }
 
 /*
-float measurepHSN()
-{
-
-    return 5.0;
-}
 
 void regulatepHSN(float valpHDown, float valpHUp)
 {
@@ -58,12 +53,6 @@ void regulatepHSN(float valpHDown, float valpHUp)
             dose(0, TIME_ACTIVATION_PUMP_SA);
         }
     } while (!(flagLevelContainers && flagStatuspHSN));
-}
-
-float measureECSN()
-{
-
-    return 5.0;
 }
 
 void regulateECSN(float valECDown, float valECUp)

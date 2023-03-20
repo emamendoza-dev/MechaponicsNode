@@ -1,12 +1,3 @@
-struct ConfigProfileSN {
- float valpHUp;
- float valpHDown;
- float valECUp;
- float valECDown;
-};
-
-ConfigProfileSN cProfileSN;
-
 void loadConfiguration(const char *filename, ConfigProfileSN &cProfileSN) {
   File file = SD.open(filename);
 
@@ -62,6 +53,8 @@ void printFile(const char *filename) {
 }
 
 void initLoadProfile(){
+    while (!Serial) continue;
+
     while (!SD.begin()) {
     Serial.println(F("Failed to initialize SD library"));
     delay(1000);
