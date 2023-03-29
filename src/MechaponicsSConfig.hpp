@@ -196,6 +196,16 @@ ConfigProfileSN cProfileSN;
 
 int modeOperatingSystem = 2;
 
+// STRUCT PROFILE MODE DEMONSTRATIVE
+
+struct ConfigProfileDemonostrative {
+ bool dispensers;
+ bool measures;
+ bool solution;
+};
+
+ConfigProfileDemonostrative cProfileDemonostrative;
+
 // VARIABLES OLED DISPLAY
 
 #define OLED_WIDTH 128

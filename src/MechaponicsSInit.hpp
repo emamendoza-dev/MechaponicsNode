@@ -5,6 +5,7 @@
 #include "MechaponicsSFirebase.hpp"
 #include "MechaponicsSUART.hpp"
 #include "MechaponicsSOLED.hpp"
+#include "MechaponicsSModeDemonstrative.hpp"
 // #include "MechaponicsSMicroSD.hpp"
 
 Scheduler firebaseSchedulerState;
