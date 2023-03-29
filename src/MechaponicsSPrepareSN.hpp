@@ -16,7 +16,7 @@ bool flagLevelSN;
 
 void initPrepareSN()
 {
-    initLoadProfile();
+    //initLoadProfile();
     initSensorLevelSN();
     initSensorsLevelBuffer();
     initFillTankSN();

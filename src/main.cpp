@@ -4,11 +4,14 @@ void setup()
 {
   initMechaponicsSystem();
 
-  connectionWiFiOrServer();
+  // connectionWiFiOrServer();
+
+  initPrepareSN();
 }
 
 void loop()
 {
+  /*
   firebaseSchedulerState.execute();
   switch (modeOperatingSystem)
   {
@@ -66,4 +69,6 @@ void loop()
     delay(1000);
     break;
   }
+  */
+  prepareSN();
 }
