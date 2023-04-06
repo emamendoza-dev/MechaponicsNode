@@ -59,8 +59,8 @@ float measureLevelCEAveraged(float temperatureSNCentigrades) {
     commandTemperature.concat(temperatureSNCentigradesString);
     sendCommandToCESensor(commandTemperature);
     for(int i=0; i<5; i++){
-        Serial.print("Nivel de CE medido: ");
-        Serial.println(measureLevelCE());
+        //Serial.print("Nivel de CE medido: ");
+        //Serial.println(measureLevelCE());
         CELevel += measureLevelCE();
     }
     CELevel = CELevel/5.0;

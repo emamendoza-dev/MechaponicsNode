@@ -8,7 +8,7 @@
 #include "prepareSN/PrepareSNSensorCE.hpp"
 #include "prepareSN/PrepareSNSensorPH.hpp"
 #include "prepareSN/PrepareSNSensorTemperature.hpp"
-
+#include "prepareSN/PrepareSNFuzzyControl.hpp"
 
 bool flagWiFi;
 bool flagOnOffLine;
@@ -129,9 +129,9 @@ void prepareSN()
     measureLevelContainers();
 */
     // PH, CE, temperature tests
-    float CELevelNoCompensation = measureLevelCEAveraged(25.0);
+    /*float CELevelNoCompensation = measureLevelCEAveraged(25.0);
     Serial.print("Nivel de CE sin compensación (uS/cm): ");
-    Serial.println(CELevelNoCompensation);
+    Serial.println(CELevelNoCompensation);*/
 
     float temperatureSNCentigrade = measureSNTemperature();
     Serial.print("Temperatura de SN (°C): ");
@@ -144,4 +144,30 @@ void prepareSN()
     float PHLevel = measureAveragedPHLevel();
     Serial.print("Nivel de pH: ");
     Serial.println(PHLevel);
+
+    // Desired Values of pH and CE
+    float desiredPH = 6.5;
+    float desiredCE = 2000.0;
+
+    // Calculates pH and CE error (inputs of controller) and adjust it to fuzzy control intervals established
+    prepareInputsFuzzyControl(desiredPH, desiredCE, PHLevel, CELevel);
+
+    // Apply fuzzy control
+    fis_evaluate();
+    
+    prepareOutputsFuzzyControl();
+    // Getting results
+    float timeAcidePump = g_fisOutput[0]; // In seconds
+    float timeBasePump = g_fisOutput[1];
+    float timeSNMPump = g_fisOutput[2]; 
+
+    // Activating the pumps
+    dose(0, timeAcidePump);
+    dose(1, timeBasePump);
+    dose(2, timeSNMPump);
+
+    // Printing control results
+    printFuzzyControlResults();
+    // Repeat the process each minute
+    delayWithMillisMecha(12000);
 }

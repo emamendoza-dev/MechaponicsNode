@@ -1,4 +1,5 @@
 #include "MechaponicsSConfig.hpp"
+#include "MechaponicsSTime.hpp"
 #include "MechaponicsSPrepareSN.hpp"
 #include "MechaponicsSSPIFFS.hpp"
 #include "MechaponicsSWiFiManager.hpp"
