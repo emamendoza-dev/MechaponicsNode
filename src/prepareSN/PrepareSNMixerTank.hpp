@@ -9,7 +9,7 @@ void mixer(uint32_t timeMixer)
 {
     ledcWrite(aPMMixerRigh.channelPWM, aPMMixerRigh.dutyCyclePWM);
     ledcWrite(aPMMixerLeft.channelPWM, aPMMixerLeft.dutyCyclePWM);
-    delay(timeMixer);
+    delayWithMillisMecha(timeMixer);
     ledcWrite(aPMMixerRigh.channelPWM, 0);
     ledcWrite(aPMMixerLeft.channelPWM, 0);
 }

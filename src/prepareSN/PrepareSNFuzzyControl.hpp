@@ -77,32 +77,32 @@ int fis_gIMFCount[] = { 5, 5 };
 int fis_gOMFCount[] = { 3, 3, 3 };
 
 // Coefficients for the Input Member Functions
-FIS_TYPE fis_gMFI0Coeff1[] = { -1, -1, -0.7, -0.4 };
-FIS_TYPE fis_gMFI0Coeff2[] = { -0.7, -0.3, -0.1 };
+FIS_TYPE fis_gMFI0Coeff1[] = { -1, -1, -0.8, -0.6 };
+FIS_TYPE fis_gMFI0Coeff2[] = { -0.7, -0.4, -0.15 };
 FIS_TYPE fis_gMFI0Coeff3[] = { -0.2, 0, 0.2 };
-FIS_TYPE fis_gMFI0Coeff4[] = { 0.1, 0.3, 0.7 };
-FIS_TYPE fis_gMFI0Coeff5[] = { 0.4, 0.7, 1, 1 };
+FIS_TYPE fis_gMFI0Coeff4[] = { 0.15, 0.4, 0.7 };
+FIS_TYPE fis_gMFI0Coeff5[] = { 0.6, 0.8, 1, 1 };
 FIS_TYPE* fis_gMFI0Coeff[] = { fis_gMFI0Coeff1, fis_gMFI0Coeff2, fis_gMFI0Coeff3, fis_gMFI0Coeff4, fis_gMFI0Coeff5 };
 FIS_TYPE fis_gMFI1Coeff1[] = { -100, -100, -60 };
-FIS_TYPE fis_gMFI1Coeff2[] = { -80, -40, -10 };
-FIS_TYPE fis_gMFI1Coeff3[] = { -20, 0, 20 };
-FIS_TYPE fis_gMFI1Coeff4[] = { 10, 40, 80 };
+FIS_TYPE fis_gMFI1Coeff2[] = { -70, -50, -20 };
+FIS_TYPE fis_gMFI1Coeff3[] = { -30, 0, 30 };
+FIS_TYPE fis_gMFI1Coeff4[] = { 20, 50, 70 };
 FIS_TYPE fis_gMFI1Coeff5[] = { 60, 100, 100 };
 FIS_TYPE* fis_gMFI1Coeff[] = { fis_gMFI1Coeff1, fis_gMFI1Coeff2, fis_gMFI1Coeff3, fis_gMFI1Coeff4, fis_gMFI1Coeff5 };
 FIS_TYPE** fis_gMFICoeff[] = { fis_gMFI0Coeff, fis_gMFI1Coeff };
 
 // Coefficients for the Output Member Functions
-FIS_TYPE fis_gMFO0Coeff1[] = { 0, 0, 1 };
-FIS_TYPE fis_gMFO0Coeff2[] = { 0.5, 1.5, 3 };
-FIS_TYPE fis_gMFO0Coeff3[] = { 2.5, 5, 5 };
+FIS_TYPE fis_gMFO0Coeff1[] = { 0, 0, 0.05 };
+FIS_TYPE fis_gMFO0Coeff2[] = { 0.04, 0.25, 0.35 };
+FIS_TYPE fis_gMFO0Coeff3[] = { 0.25, 0.4, 0.5, 0.5 };
 FIS_TYPE* fis_gMFO0Coeff[] = { fis_gMFO0Coeff1, fis_gMFO0Coeff2, fis_gMFO0Coeff3 };
-FIS_TYPE fis_gMFO1Coeff1[] = { 0, 0, 1 };
-FIS_TYPE fis_gMFO1Coeff2[] = { 0.5, 1.5, 3 };
-FIS_TYPE fis_gMFO1Coeff3[] = { 2.5, 5, 5 };
+FIS_TYPE fis_gMFO1Coeff1[] = { 0, 0, 0.05 };
+FIS_TYPE fis_gMFO1Coeff2[] = { 0.04, 0.25, 0.35 };
+FIS_TYPE fis_gMFO1Coeff3[] = { 0.25, 0.4, 0.5, 0.5 };
 FIS_TYPE* fis_gMFO1Coeff[] = { fis_gMFO1Coeff1, fis_gMFO1Coeff2, fis_gMFO1Coeff3 };
-FIS_TYPE fis_gMFO2Coeff1[] = { 0, 0, 1 };
-FIS_TYPE fis_gMFO2Coeff2[] = { 0.5, 3, 7 };
-FIS_TYPE fis_gMFO2Coeff3[] = { 4, 10, 10 };
+FIS_TYPE fis_gMFO2Coeff1[] = { 0, 0, 0.15 };
+FIS_TYPE fis_gMFO2Coeff2[] = { 0.1, 1, 1.5 };
+FIS_TYPE fis_gMFO2Coeff3[] = { 1, 1.5, 2, 2 };
 FIS_TYPE* fis_gMFO2Coeff[] = { fis_gMFO2Coeff1, fis_gMFO2Coeff2, fis_gMFO2Coeff3 };
 FIS_TYPE** fis_gMFOCoeff[] = { fis_gMFO0Coeff, fis_gMFO1Coeff, fis_gMFO2Coeff };
 
@@ -112,9 +112,9 @@ int fis_gMFI1[] = { 1, 1, 1, 1, 1 };
 int* fis_gMFI[] = { fis_gMFI0, fis_gMFI1};
 
 // Output membership function set
-int fis_gMFO0[] = { 1, 1, 1 };
-int fis_gMFO1[] = { 1, 1, 1 };
-int fis_gMFO2[] = { 1, 1, 1 };
+int fis_gMFO0[] = { 1, 1, 0 };
+int fis_gMFO1[] = { 1, 1, 0 };
+int fis_gMFO2[] = { 1, 1, 0 };
 int* fis_gMFO[] = { fis_gMFO0, fis_gMFO1, fis_gMFO2};
 
 // Rule Weights
@@ -189,7 +189,7 @@ FIS_TYPE fis_gIMax[] = { 1, 100 };
 FIS_TYPE fis_gOMin[] = { 0, 0, 0 };
 
 // Output range Max
-FIS_TYPE fis_gOMax[] = { 5, 5, 10 };
+FIS_TYPE fis_gOMax[] = { 0.5, 0.5, 2 };
 
 //***********************************************************************
 // Data dependent support functions for Fuzzy Inference System           
@@ -343,11 +343,17 @@ void prepareInputsFuzzyControl(float targetPH, float targetCE, float realPH, flo
 
 // This function prepares the values obtained by the controller
 // Transform the values from s to ms and makes output Zero if the output is small
-void prepareOutputsFuzzyControl(){
+void prepareOutputsFuzzyControl(int signalOutputAmplifier){
     for(int i=0; i<3; i++){
-        g_fisOutput[i] = g_fisOutput[i]*1000; // Convert output to ms
-        if(g_fisOutput[i] < 0.4)
-        g_fisOutput[i] = 0.0;
+        g_fisOutput[i] = g_fisOutput[i]*1000*signalOutputAmplifier; // Convert output to ms
+    }
+    g_fisOutput[2] = g_fisOutput[2]*5; 
+    if(g_fisInput[1] < 0 || abs(g_fisInput[1]) <= 30) // If the CE error is negative
+    g_fisOutput[2] = 0.0; // Never activate SNM pump
+
+    if(abs(g_fisInput[0]) <= 0.2){
+        g_fisOutput[0] = 0.0;
+        g_fisOutput[1] = 0.0;
     }
 }
 
@@ -363,11 +369,18 @@ void printFuzzyControlResults(){
     Serial.println("OUTPUT");
     Serial.print("ACIDE: ");
     Serial.print(g_fisOutput[0]);
-    Serial.println(" s");
+    Serial.println(" ms");
     Serial.print("BASE: ");
     Serial.print(g_fisOutput[1]);
-    Serial.println(" s");
+    Serial.println(" ms");
     Serial.print("SNM: ");
     Serial.print(g_fisOutput[2]);
-    Serial.println(" s");
+    Serial.println(" ms");
+}
+
+// This fuction returns T if pHError || CEError is more than permisible values
+bool is_pH_CE_Error(float permisibleErrorpH, float permisibleErrorCE) {
+    Serial.print("Error en pH o CE");
+    Serial.println(abs(g_fisInput[0]) >= permisibleErrorpH || abs(g_fisInput[1]) >= permisibleErrorCE);
+    return (abs(g_fisInput[0]) >= permisibleErrorpH || abs(g_fisInput[1]) >= permisibleErrorCE);
 }

@@ -18,7 +18,6 @@
 #include <TaskScheduler.h>
 
 // FUZZY CONTROL DEFINITIONS
-
 #define FIS_TYPE float
 #define FIS_RESOLUSION 101
 #define FIS_MIN -3.4028235E+38
@@ -54,7 +53,7 @@ DallasTemperature temperatureSensor(&ourWireTemperatureSensor);
 
 #define LEVEL_TANK_SN_OFFSET 2
 #define LEVEL_TANK_SN_MIN 40
-#define LEVEL_TANK_SN_FULL 95
+#define LEVEL_TANK_SN_FULL 80
 #define LEVEL_TANK_SN_MAX 13
 
 // STRUCT SENSOR LEVEL SN
