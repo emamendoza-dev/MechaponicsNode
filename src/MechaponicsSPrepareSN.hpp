@@ -208,5 +208,6 @@ void prepareSN()
         prepareInputsFuzzyControl(desiredPH, desiredCE, PHLevel, CELevel);
     }
 
+    Serial.println("Solución lista papu");
     delayWithMillisMecha(120000); // Repeat process every 15 minutes (900000)
 }
