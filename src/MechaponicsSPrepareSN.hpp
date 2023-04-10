@@ -133,6 +133,6 @@ void prepareSN()
     Serial.print("CE (uS/cm): ");
     Serial.println(dBaseVarSN.dbNode1EC);
 
-    Serial.println("Solución lista papu");
+    Serial.println("Solución preparada");
     delayWithMillisMecha(120000); // Repeat process every 15 minutes (900000)
 }
