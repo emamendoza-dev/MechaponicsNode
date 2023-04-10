@@ -1,4 +1,5 @@
-struct sensorsLevelBuffer {
+struct sensorsLevelBuffer
+{
   int flagLevelMinSA;
   int flagLevelMinSB;
   int flagLevelMinSNM;
@@ -6,13 +7,15 @@ struct sensorsLevelBuffer {
 
 sensorsLevelBuffer sLevelBuffer = {0, 0, 0};
 
-void initSensorsLevelBuffer(){
+void initSensorsLevelBuffer()
+{
   pinMode(SENSOR_LEVEL_SA, INPUT);
   pinMode(SENSOR_LEVEL_SB, INPUT);
   pinMode(SENSOR_LEVEL_SNM, INPUT);
 }
 
-bool measureLevelContainers(){
+bool measureLevelContainers()
+{
   // Code for measure level for solutions buffers
   sLevelBuffer.flagLevelMinSA = digitalRead(SENSOR_LEVEL_SA);
   Serial.println("Sensor SA");

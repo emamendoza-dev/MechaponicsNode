@@ -61,13 +61,13 @@ void connectFirebaseBD()
   Firebase.setwriteSizeLimit(firebaseData, "tiny");
 }
 
-// Escribir datos en la base de datos en Firebase
+// Write data to database in Firebase
 void writeFirebaseBD()
 {
   Serial.println("------------------------------------");
   Serial.println("  ACTUALIZAR EL ESTADO DE SISTEMA SN ");
   // Sensor de pH
-  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable1", n1pH))
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable1", dBaseVarSN.dbNode1pH))
   {
     InformacionSet();
   }
@@ -76,7 +76,7 @@ void writeFirebaseBD()
     MostrarError();
   }
   // Sensor de CE
-  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable2", n1CE))
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable2", dBaseVarSN.dbNode1EC))
   {
     InformacionSet();
   }
@@ -85,52 +85,7 @@ void writeFirebaseBD()
     MostrarError();
   }
   // Sensor de CE
-  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable3", n1Temp))
-  {
-    InformacionSet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  // Sensor de Nivel Tanque SN
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable4", n1NT))
-  {
-    InformacionSet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  // Sensor de Nivel SN Madre
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable8", n1NSN))
-  {
-    InformacionSet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  // Sensor de Nivel Acido
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable5", n1NAcd))
-  {
-    InformacionSet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  // Sensor de Nivel Base
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable6", n1NBas))
-  {
-    InformacionSet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  // Sensor de Nivel Agua
-  if (Firebase.setInt(firebaseData, pathS + pathN + "/Variable7", n1NAg))
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable3", dBaseVarSN.dbNode1Temp))
   {
     InformacionSet();
   }
@@ -233,8 +188,7 @@ void readPerfilMechaSystem(){
 
   if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/pH"))
   {
-    cProfileSN.valpHDown = firebaseData.to<float>() - 0.1;
-    cProfileSN.valpHUp = firebaseData.to<float>() + 0.1;
+    cProfileSN.valpHProfileSN = firebaseData.to<float>();
     InformacionGet();
   }
   else
@@ -243,8 +197,7 @@ void readPerfilMechaSystem(){
   }
   if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/CE"))
   {
-    cProfileSN.valECDown = firebaseData.to<float>() - 0.1;
-    cProfileSN.valECUp = firebaseData.to<float>() + 0.1;
+    cProfileSN.valECProfileSN = firebaseData.to<float>();
     InformacionGet();
   }
   else

@@ -18,10 +18,11 @@ Task TaskOLEDParameters(20000, TASK_FOREVER, &showParametersOLED);
 void initMechaponicsSystem()
 {
     Serial.begin(115200);
-    //initOLED();
-    //initSerialPortUART();
-    //initSPIFFS();
-    //initWiFiIndicator();
+    initOLED();
+    initSerialPortUART();
+    initSPIFFS();
+    initWiFiIndicator();
+    initPrepareSN();
 }
 
 void connectionWiFiOrServer()

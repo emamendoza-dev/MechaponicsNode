@@ -90,7 +90,8 @@ void connectWiFiServer()
 
 // Function for inicialization WiFi Indicator
 
-void initWiFiIndicator(){
+void initWiFiIndicator()
+{
   pinMode(INDICATOR_WIFI, OUTPUT);
   digitalWrite(INDICATOR_WIFI, LOW);
 }

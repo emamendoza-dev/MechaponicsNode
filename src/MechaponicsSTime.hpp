@@ -1,5 +1,8 @@
-// Function to emulate the delay() behaviour using millis() 
-void delayWithMillisMecha(uint32_t milliseconds){
+// Function to emulate the delay() behaviour using millis()
+void delayWithMillisMecha(uint32_t milliseconds)
+{
   unsigned long timeNow = millis();
-  while(millis() < timeNow + milliseconds){}
+  while (millis() < timeNow + milliseconds)
+  {
+  }
 }

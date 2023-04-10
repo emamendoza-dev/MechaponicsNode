@@ -4,14 +4,11 @@ void setup()
 {
   initMechaponicsSystem();
 
-  // connectionWiFiOrServer();
-
-  initPrepareSN();
+  connectionWiFiOrServer();
 }
 
 void loop()
 {
-  /*
   firebaseSchedulerState.execute();
   switch (modeOperatingSystem)
   {
@@ -25,50 +22,58 @@ void loop()
     Serial.println(F("Print config file..."));
     printFile(PATH_SD_PROFILE_SN);
 
-    Serial.println(cProfileSN.valpHUp);
-    Serial.println(cProfileSN.valpHDown);
-    Serial.println(cProfileSN.valECUp);
-    Serial.println(cProfileSN.valECDown);
+    Serial.println(cProfileSN.valpHProfileSN);
+    Serial.println(cProfileSN.valECProfileSN);
+
+    // prepareSN();
+
+    mixer(45000);
+
+    delayWithMillisMecha(5000);
+
+    dBaseVarSN.dbNode1Temp = measureSNTemperature();
+    dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
+    dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
+    Serial.print("Temp (°C): ");
+    Serial.println(dBaseVarSN.dbNode1Temp);
+    Serial.print("pH: ");
+    Serial.println(dBaseVarSN.dbNode1pH);
+    Serial.print("CE (uS/cm): ");
+    Serial.println(dBaseVarSN.dbNode1EC);
+
+    writeFirebaseBD();
 
     showParametersOLED();
 
-    delay(1000);
+    irrigateSN(60000);
+
     break;
   case 1:
     Serial.println("Modo de operación demostrativo");
     readTestingModeDemonstrative();
     if (cProfileDemonostrative.dispensers)
     {
-      dose(0, 3000);
-      dose(1, 3000);
-      dose(2, 3000);
+      Serial.println("Activando dosificadores");
     }
     if (cProfileDemonostrative.measures)
     {
-      // PH, CE, temperature tests
-      float CELevelNoCompensation = measureLevelCEAveraged(25.0);
-      Serial.print("Nivel de CE sin compensación (uS/cm): ");
-      Serial.println(CELevelNoCompensation);
+      dBaseVarSN.dbNode1Temp = measureSNTemperature();
+      dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
+      dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
+      Serial.print("Temp (°C): ");
+      Serial.println(dBaseVarSN.dbNode1Temp);
+      Serial.print("pH: ");
+      Serial.println(dBaseVarSN.dbNode1pH);
+      Serial.print("CE (uS/cm): ");
+      Serial.println(dBaseVarSN.dbNode1EC);
 
-      float temperatureSNCentigrade = measureSNTemperature();
-      Serial.print("Temperatura de SN (°C): ");
-      Serial.println(temperatureSNCentigrade);
-
-      float CELevel = measureLevelCEAveraged(temperatureSNCentigrade);
-      Serial.print("Nivel de CE con compensación (uS/cm): ");
-      Serial.println(CELevel);
-
-      float PHLevel = measureAveragedPHLevel();
-      Serial.print("Nivel de pH: ");
-      Serial.println(PHLevel);
+      writeFirebaseBD();
     }
-    delay(1000);
+    delayWithMillisMecha(1000);
     break;
   default:
     Serial.println("Modo de operación desconocido");
-    delay(1000);
+    delayWithMillisMecha(1000);
     break;
   }
-  */
-  prepareSN();
 }

@@ -28,6 +28,9 @@ typedef FIS_TYPE(*_FIS_ARR)(FIS_TYPE*, int, _FIS_ARR_OP);
 
 // PINOUT-CONFIG ACTUATORS AND SENSORS NODE1
 
+// SUBMERSIBLE PUMP (RELAY) PINOUT
+#define PIN_RELAY_SUBMERSIBLE_PUMP 0
+
 // CE SENSOR PINOUT AND GLOBAL VARIABLES
 
 #define SENSOR_CE_RX 9
@@ -190,10 +193,8 @@ String pathN = "/Nodo1";
 // STRUCT CONFIGURATION PROFILE SN
 
 struct ConfigProfileSN {
- float valpHUp;
- float valpHDown;
- float valECUp;
- float valECDown;
+ float valpHProfileSN;
+ float valECProfileSN;
 };
 
 ConfigProfileSN cProfileSN;
@@ -222,15 +223,15 @@ ConfigProfileDemonostrative cProfileDemonostrative;
 const uint8_t OLED_ADDRESS = 0X3C;
 const int8_t OLED_RESET = -1;
 
-// Variables a transmitir a la base de datos
-float n1pH = 0;
-float n1CE = 0;
-float n1Temp = 0;
-int n1NT = 0;
-int n1NSN = 0;
-int n1NAcd = 0;
-int n1NBas = 0;
-int n1NAg = 0;
+// STRUCT DATABASE VARIABLES SN
+
+struct DataBaseVariablesSN {
+ float dbNode1pH;
+ float dbNode1EC;
+ float dbNode1Temp;
+};
+
+DataBaseVariablesSN dBaseVarSN;
 
 // Variables a transmitir vía UART
 int board = 1;

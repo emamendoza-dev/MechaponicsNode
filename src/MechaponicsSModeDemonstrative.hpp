@@ -1,4 +1,5 @@
-void readTestingModeDemonstrative(){
+void readTestingModeDemonstrative()
+{
   Serial.println("------------------------------------");
   Serial.println("  LEER LAS PRUEBAS DEL SISTEMA ");
 
@@ -11,7 +12,7 @@ void readTestingModeDemonstrative(){
   {
     MostrarError();
   }
-  
+
   if (Firebase.getFloat(firebaseData, pathS + pathStateMechaSystem + "/Mediciones"))
   {
     cProfileDemonostrative.measures = firebaseData.to<bool>();
@@ -21,5 +22,4 @@ void readTestingModeDemonstrative(){
   {
     MostrarError();
   }
-  
 }

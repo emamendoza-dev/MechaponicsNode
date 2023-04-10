@@ -11,6 +11,7 @@ void initUART()
 
 void writeUART()
 {
+  /*
   String json;
 
   StaticJsonDocument<192> doc;
@@ -29,11 +30,13 @@ void writeUART()
 
   Serial.println(json);
   Serial1.println(json);
+  */
 }
 
 // Recepción de datos por el puerto serie
 void readUART()
 {
+  /*
   if (messageReady)
   {
     DynamicJsonDocument doc(1024);
@@ -61,6 +64,7 @@ void readUART()
     }
     messageReady = false;
   }
+  */
 }
 
 void initSerialPortUART(){
