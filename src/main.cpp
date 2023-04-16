@@ -10,6 +10,8 @@ void setup()
 void loop()
 {
   firebaseSchedulerState.execute();
+  Serial.println("Nodos activos");
+  Serial.println(activeNodes);
   switch (modeOperatingSystem)
   {
   case 0:
@@ -27,25 +29,39 @@ void loop()
 
     // prepareSN();
 
-    mixer(45000);
+    mixer(15000);
 
     delayWithMillisMecha(5000);
+
+    //readNode1VariablesSN();
 
     dBaseVarSN.dbNode1Temp = measureSNTemperature();
     dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
     dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
+    dBaseVarSN.dbNode1LevelSN = measureLevelSN();
+    dBaseVarSN.dbNode1LevelSA = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SA));
+    dBaseVarSN.dbNode1LevelSB = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SB));
+    dBaseVarSN.dbNode1LevelSNM = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SNM));
     Serial.print("Temp (°C): ");
     Serial.println(dBaseVarSN.dbNode1Temp);
     Serial.print("pH: ");
     Serial.println(dBaseVarSN.dbNode1pH);
     Serial.print("CE (uS/cm): ");
     Serial.println(dBaseVarSN.dbNode1EC);
+    Serial.print("Level SN (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSN);
+    Serial.print("Level SA (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSA);
+    Serial.print("Level SB (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSB);
+    Serial.print("Level SNM (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSNM);
 
     writeFirebaseBD();
 
     showParametersOLED();
 
-    irrigateSN(60000);
+    //irrigateSN(60000);
 
     break;
   case 1:

@@ -66,7 +66,7 @@ void writeFirebaseBD()
 {
   Serial.println("------------------------------------");
   Serial.println("  ACTUALIZAR EL ESTADO DE SISTEMA SN ");
-  // Sensor de pH
+  // Sensor pH
   if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable1", dBaseVarSN.dbNode1pH))
   {
     InformacionSet();
@@ -75,7 +75,7 @@ void writeFirebaseBD()
   {
     MostrarError();
   }
-  // Sensor de CE
+  // Sensor EC
   if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable2", dBaseVarSN.dbNode1EC))
   {
     InformacionSet();
@@ -84,8 +84,44 @@ void writeFirebaseBD()
   {
     MostrarError();
   }
-  // Sensor de CE
+  // Sensor Temp
   if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable3", dBaseVarSN.dbNode1Temp))
+  {
+    InformacionSet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  // Sensor Level SN
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable4", dBaseVarSN.dbNode1LevelSN))
+  {
+    InformacionSet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  // Sensor Level SA
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable5", dBaseVarSN.dbNode1LevelSA))
+  {
+    InformacionSet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  // Sensor Level SB
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable6", dBaseVarSN.dbNode1LevelSB))
+  {
+    InformacionSet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  // Sensor Level SNM
+  if (Firebase.setFloat(firebaseData, pathS + pathN + "/Variable8", dBaseVarSN.dbNode1LevelSNM))
   {
     InformacionSet();
   }
@@ -182,7 +218,61 @@ void readStateMechaSystem(){
   }
 }
 
-void readPerfilMechaSystem(){
+void readStateNodesMechaSystem()
+{
+  Serial.println("------------------------------------");
+  Serial.println("  LEER EL ESTADO DE LOS NODOS ");
+
+  if (Firebase.getInt(firebaseData, pathS + pathNodes + "/N4"))
+  {
+    if (firebaseData.to<int>() == 1)
+    {
+      activeNodes = 4;
+    }
+    else
+    {
+      if (Firebase.getInt(firebaseData, pathS + pathNodes + "/N3"))
+      {
+        if (firebaseData.to<int>() == 1)
+        {
+          activeNodes = 3;
+        }
+        else
+        {
+          if (Firebase.getInt(firebaseData, pathS + pathNodes + "/N2"))
+          {
+            if (firebaseData.to<int>() == 1)
+            {
+              activeNodes = 2;
+            }
+            else
+            {
+              activeNodes = 1;
+            }
+            InformacionGet();
+          }
+          else
+          {
+            MostrarError();
+          }
+        }
+        InformacionGet();
+      }
+      else
+      {
+        MostrarError();
+      }
+    }
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+}
+
+void readPerfilMechaSystem()
+{
   Serial.println("------------------------------------");
   Serial.println("  LEER EL PERFIL DEL SISTEMA ");
 
@@ -204,8 +294,34 @@ void readPerfilMechaSystem(){
   {
     MostrarError();
   }
-
+  if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/Temp"))
+  {
+    cProfileCC.valTemProfileCC = firebaseData.to<float>();
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathPerfilMechaSystem + "/Hum"))
+  {
+    cProfileCC.valHumProfileCC = firebaseData.to<int>();
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  if (Firebase.getInt(firebaseData, pathS + pathPerfilMechaSystem + "/Lum"))
+  {
+    cProfileCC.valLumProfileCC = firebaseData.to<int>();
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
   // Create configuration file
-    Serial.println(F("Saving configuration..."));
-    saveConfiguration(PATH_SD_PROFILE_SN, cProfileSN); 
+  Serial.println(F("Saving configuration..."));
+  saveConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
 }

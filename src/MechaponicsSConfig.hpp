@@ -184,6 +184,7 @@ String pathS = "/MechaponicsSystem";
 String pathStateMechaSystem = "/Estado";
 String pathPerfilMechaSystem = "/Perfil";
 String pathN = "/Nodo1";
+String pathNodes = "/Nodos";
 
 // MICRO SD PATHS 
 
@@ -229,9 +230,27 @@ struct DataBaseVariablesSN {
  float dbNode1pH;
  float dbNode1EC;
  float dbNode1Temp;
+ int dbNode1LevelSN;
+ int dbNode1LevelSA;
+ int dbNode1LevelSB;
+ int dbNode1LevelSNM;
 };
 
 DataBaseVariablesSN dBaseVarSN;
+
+// STRUCT CONFIGURATION PROFILE CC
+
+struct ConfigProfileCC {
+ float valTemProfileCC;
+ int valHumProfileCC;
+ int valLumProfileCC;
+};
+
+ConfigProfileCC cProfileCC;
+
+// VARIABLE FOR ACTIVE NODES MECHA SYSTEM
+
+int activeNodes;
 
 // Variables a transmitir vía UART
 int board = 1;

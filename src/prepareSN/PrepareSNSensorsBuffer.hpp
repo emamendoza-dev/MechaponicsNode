@@ -14,6 +14,14 @@ void initSensorsLevelBuffer()
   pinMode(SENSOR_LEVEL_SNM, INPUT);
 }
 
+int conversionLevelContainers(int measureLevel){
+  int levelReturn;
+
+  if (measureLevel == 1) levelReturn=80; else levelReturn=20;
+
+  return levelReturn; 
+}
+
 bool measureLevelContainers()
 {
   // Code for measure level for solutions buffers

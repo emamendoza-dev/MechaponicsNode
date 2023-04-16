@@ -12,6 +12,7 @@
 Scheduler firebaseSchedulerState;
 
 Task TaskFirebaseState(10000, TASK_FOREVER, &readStateMechaSystem);
+Task TaskFirebaseStateNodes(10000, TASK_FOREVER, &readStateNodesMechaSystem);
 Task TaskFirebasePerfil(15000, TASK_FOREVER, &readPerfilMechaSystem);
 Task TaskOLEDParameters(20000, TASK_FOREVER, &showParametersOLED);
 
@@ -50,11 +51,13 @@ void connectionWiFiOrServer()
         firebaseSchedulerState.addTask(TaskFirebaseState);
         firebaseSchedulerState.addTask(TaskFirebasePerfil);
         firebaseSchedulerState.addTask(TaskOLEDParameters);
+        firebaseSchedulerState.addTask(TaskFirebaseStateNodes);
 
 
         TaskFirebaseState.enable();
         TaskFirebasePerfil.enable();
         TaskOLEDParameters.enable();
+        TaskFirebaseStateNodes.enable();
 
         initPrepareSN();
     }

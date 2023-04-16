@@ -49,6 +49,30 @@ void measureSN()
     Serial.println(CELevel);
 }
 
+void readNode1VariablesSN(){
+    dBaseVarSN.dbNode1Temp = measureSNTemperature();
+    dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
+    dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
+    dBaseVarSN.dbNode1LevelSN = measureLevelSN();
+    dBaseVarSN.dbNode1LevelSA = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SA));
+    dBaseVarSN.dbNode1LevelSB = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SB));
+    dBaseVarSN.dbNode1LevelSNM = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SNM));
+    Serial.print("Temp (°C): ");
+    Serial.println(dBaseVarSN.dbNode1Temp);
+    Serial.print("pH: ");
+    Serial.println(dBaseVarSN.dbNode1pH);
+    Serial.print("CE (uS/cm): ");
+    Serial.println(dBaseVarSN.dbNode1EC);
+    Serial.print("Level SN (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSN);
+    Serial.print("Level SA (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSA);
+    Serial.print("Level SB (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSB);
+    Serial.print("Level SNM (%): ");
+    Serial.println(dBaseVarSN.dbNode1LevelSNM);
+}
+
 void prepareSN()
 {
     levelSN = measureLevelSN();
@@ -111,27 +135,7 @@ void prepareSN()
 
     delayWithMillisMecha(20000);
 
-    dBaseVarSN.dbNode1Temp = measureSNTemperature();
-    dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
-    dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
-    Serial.print("Temp (°C): ");
-    Serial.println(dBaseVarSN.dbNode1Temp);
-    Serial.print("pH: ");
-    Serial.println(dBaseVarSN.dbNode1pH);
-    Serial.print("CE (uS/cm): ");
-    Serial.println(dBaseVarSN.dbNode1EC);
-
-    delayWithMillisMecha(20000);
-
-    dBaseVarSN.dbNode1Temp = measureSNTemperature();
-    dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
-    dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
-    Serial.print("Temp (°C): ");
-    Serial.println(dBaseVarSN.dbNode1Temp);
-    Serial.print("pH: ");
-    Serial.println(dBaseVarSN.dbNode1pH);
-    Serial.print("CE (uS/cm): ");
-    Serial.println(dBaseVarSN.dbNode1EC);
+    readNode1VariablesSN();
 
     Serial.println("Solución preparada");
     delayWithMillisMecha(120000); // Repeat process every 15 minutes (900000)
