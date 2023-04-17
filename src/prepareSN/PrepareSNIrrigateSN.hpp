@@ -1,11 +1,16 @@
-void initSubmersiblePump(){
+actuatorPumpMotor aPMIrrigateSN = {PWM_FRECUENCY_ACTUATOR, PWM_CHANNEL_IRRIGATE, PWM_RESOLUTION_ACTUATOR, PWM_SPEED_IRRIGATE_SN};
+
+void initSubmersiblePump()
+{
     pinMode(PIN_RELAY_SUBMERSIBLE_PUMP, OUTPUT);
-    digitalWrite(PIN_RELAY_SUBMERSIBLE_PUMP, LOW);
+    ledcSetup(aPMIrrigateSN.channelPWM, aPMIrrigateSN.frecuencyPWM, aPMIrrigateSN.resolutionPWM);
+    ledcAttachPin(PIN_RELAY_SUBMERSIBLE_PUMP, aPMIrrigateSN.channelPWM);
 }
 
 // This function irrigates SN the time indicated
-void irrigateSN(uint32_t irrigationTimeMs){
-    digitalWrite(PIN_RELAY_SUBMERSIBLE_PUMP, HIGH);
+void irrigateSN(uint32_t irrigationTimeMs)
+{
+    ledcWrite(aPMIrrigateSN.channelPWM, aPMIrrigateSN.dutyCyclePWM);
     delayWithMillisMecha(irrigationTimeMs);
-    digitalWrite(PIN_RELAY_SUBMERSIBLE_PUMP, LOW);
+    ledcWrite(aPMIrrigateSN.channelPWM, 0);
 }

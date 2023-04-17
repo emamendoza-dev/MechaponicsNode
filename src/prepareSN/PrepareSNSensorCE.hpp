@@ -4,7 +4,7 @@ void sendCommandToCESensor(String command)
 {
     Serial2.print(command);
     Serial2.print('\r');
-    delay(1000);
+    delayWithMillisMecha(1000);
 }
 
 // Function to configurate and init CE sensor

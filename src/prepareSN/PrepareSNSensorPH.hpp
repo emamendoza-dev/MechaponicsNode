@@ -13,7 +13,7 @@ float measureAveragedPHLevel()
     for (int i = 0; i < 5; i++)
     {
         pHLevel += pHSensor.read_ph();
-        delay(1000);
+        delayWithMillisMecha(1000);
     }
     return pHLevel / 5.0;
 }

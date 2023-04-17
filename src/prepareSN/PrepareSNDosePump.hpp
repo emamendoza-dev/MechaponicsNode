@@ -12,17 +12,17 @@ void dose(int actuatorActivation, uint32_t timeDosePump)
     {
     case 0:
         ledcWrite(aPMBufferSA.channelPWM, aPMBufferSA.dutyCyclePWM);
-        delay(timeDosePump);
+        delayWithMillisMecha(timeDosePump);
         ledcWrite(aPMBufferSA.channelPWM, 0);
         break;
     case 1:
         ledcWrite(aPMBufferSB.channelPWM, aPMBufferSB.dutyCyclePWM);
-        delay(timeDosePump);
+        delayWithMillisMecha(timeDosePump);
         ledcWrite(aPMBufferSB.channelPWM, 0);
         break;
     case 2:
         ledcWrite(aPMBufferSNM.channelPWM, aPMBufferSNM.dutyCyclePWM);
-        delay(timeDosePump);
+        delayWithMillisMecha(timeDosePump);
         ledcWrite(aPMBufferSNM.channelPWM, 0);
         break;
     default:
