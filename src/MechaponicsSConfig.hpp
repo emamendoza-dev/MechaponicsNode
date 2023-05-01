@@ -113,7 +113,7 @@ struct sensorLevelSN {
 // SUBMERSIBLE PUMP (RELAY) PINOUT
 
 #define PIN_RELAY_SUBMERSIBLE_PUMP 0
-#define PWM_SPEED_IRRIGATE_SN 150
+#define PWM_SPEED_IRRIGATE_SN 160
 #define TIME_ACTIVATION_IRRIGATE 1000
 #define PWM_CHANNEL_IRRIGATE 6
 
@@ -209,7 +209,7 @@ ConfigProfileSN cProfileSN;
 #define MODE_AUTOMATIC_VALUE 0
 #define MODE_DEMOSTRATIVE_VALUE 1
 
-int modeOperatingSystem = 2;
+int modeOperatingSystem = 0;
 
 // STRUCT PROFILE MODE DEMONSTRATIVE
 

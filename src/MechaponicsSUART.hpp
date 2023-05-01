@@ -1,36 +1,29 @@
 // Inicialización del puerto serie
-void initUART()
+void checkUART()
 {
-  if (Serial1.available())
+  while (Serial1.available())
   {
     Serial.println("Mensaje recibido");
     message = Serial1.readString();
+    Serial.println(message);
     messageReady = true;
   }
 }
 
 void writeUART()
 {
-  /*
-  String json;
+  for (int i = 0; i > activeNodes; i++)
+  {
+    StaticJsonDocument<200> doc;
 
-  StaticJsonDocument<192> doc;
+    doc["board_status"] = i+1;
+    doc["modeO_status"] = modeOperatingSystem;
+    doc["n2Temp_status"] = cProfileCC.valTemProfileCC;
+    doc["n2Hum_status"] = cProfileCC.valHumProfileCC;
+    doc["n2Lum_status"] = cProfileCC.valLumProfileCC;
 
-  doc["board_status"] = board;
-  doc["n1pH_status"] = n1pH;
-  doc["n1CE_status"] = n1CE;
-  doc["n1Temp_status"] = n1Temp;
-  doc["n1NT_status"] = n1NT;
-  doc["n1NAcd_status"] = n1NAcd;
-  doc["n1NBas_status"] = n1NBas;
-  doc["n1NAg_status"] = n1NAg;
-  doc["n1NSN_status"] = n1NSN;
-
-  serializeJson(doc, json);
-
-  Serial.println(json);
-  Serial1.println(json);
-  */
+    serializeJson(doc, Serial1);
+  }
 }
 
 // Recepción de datos por el puerto serie
@@ -67,6 +60,7 @@ void readUART()
   */
 }
 
-void initSerialPortUART(){
+void initSerialPortUART()
+{
   Serial1.begin(115200, SERIAL_8N1, PERIPHERAL_ESP8266_RXD1, PERIPHERAL_ESP8266_TXD1);
 }

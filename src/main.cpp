@@ -9,14 +9,15 @@ void setup()
 
 void loop()
 {
-  firebaseSchedulerState.execute();
-  Serial.println("Nodos activos");
-  Serial.println(activeNodes);
+  //firebaseSchedulerState.execute();
+  //Serial.println("Nodos activos");
+  //Serial.println(activeNodes);
+  //writeUART();
   switch (modeOperatingSystem)
   {
   case 0:
     Serial.println("Modo de operación automatico");
-
+    /*
     Serial.println(F("Loading configuration..."));
     loadConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
 
@@ -27,19 +28,32 @@ void loop()
     Serial.println(cProfileSN.valpHProfileSN);
     Serial.println(cProfileSN.valECProfileSN);
 
+    */
+
     // prepareSN();
 
-    mixer(15000);
+    levelSN = measureLevelSN();
+    Serial.print("SN LEVEL (%): "); Serial.println(levelSN);
 
-    delayWithMillisMecha(5000);
+    //while(isLowSNLevel())
+        //fillTankSN();
 
-    readNode1VariablesSN();
+    mixer(5000);
 
-    writeFirebaseBD();
+    delayWithMillisMecha(10000);
 
-    showParametersOLED();
+    //readNode1VariablesSN();
 
-    irrigateSN(60000);
+    //writeFirebaseBD();
+
+    //showParametersOLED();
+
+    irrigateSN(30000);
+
+    levelSN = measureLevelSN();
+    Serial.print("SN LEVEL (%): "); Serial.println(levelSN);
+
+    delayWithMillisMecha(30000);
 
     break;
   case 1:

@@ -54,10 +54,10 @@ void connectionWiFiOrServer()
         firebaseSchedulerState.addTask(TaskFirebaseStateNodes);
 
 
-        TaskFirebaseState.enable();
-        TaskFirebasePerfil.enable();
-        TaskOLEDParameters.enable();
-        TaskFirebaseStateNodes.enable();
+        //TaskFirebaseState.enable();
+        //TaskFirebasePerfil.enable();
+        //TaskOLEDParameters.enable();
+        //TaskFirebaseStateNodes.enable();
 
         initPrepareSN();
     }
