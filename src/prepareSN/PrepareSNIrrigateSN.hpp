@@ -8,10 +8,10 @@ void initSubmersiblePump()
 }
 
 // This function irrigates SN the time indicated
-void irrigateSN(uint32_t irrigationTimeMs)
+void irrigateSN()
 {
     Serial.println("Activando irrigación");
     ledcWrite(aPMIrrigateSN.channelPWM, aPMIrrigateSN.dutyCyclePWM);
-    delayWithMillisMecha(irrigationTimeMs);
+    delayWithMillisMecha(30000);
     ledcWrite(aPMIrrigateSN.channelPWM, 0);
 }

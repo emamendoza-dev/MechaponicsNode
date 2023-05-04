@@ -16,6 +16,7 @@
 #include <OneWire.h>                
 #include <DallasTemperature.h>
 #include <TaskScheduler.h>
+#include "DHT.h"
 
 // FUZZY CONTROL DEFINITIONS
 #define FIS_TYPE float
@@ -50,9 +51,12 @@ DallasTemperature temperatureSensor(&ourWireTemperatureSensor);
 
 #define SENSOR_LEVEL_SN_TRIG 32
 #define SENSOR_LEVEL_SN_ECHO 35
+#define SENSOR_LEVEL_MAX_SAMPLES 20
+int levelSNSensorSamples[SENSOR_LEVEL_MAX_SAMPLES]; // Last SENSOR_LEVEL_MAX_SAMPLES measurements of the SN level
+int indexSNSensorSample; // Index of current SN reading
 
 #define LEVEL_TANK_SN_OFFSET 2
-#define LEVEL_TANK_SN_MIN 40
+#define LEVEL_TANK_SN_MIN 50
 #define LEVEL_TANK_SN_FULL 80
 #define LEVEL_TANK_SN_MAX 13
 
@@ -209,7 +213,7 @@ ConfigProfileSN cProfileSN;
 #define MODE_AUTOMATIC_VALUE 0
 #define MODE_DEMOSTRATIVE_VALUE 1
 
-int modeOperatingSystem = 0;
+int modeOperatingSystem = 2;
 
 // STRUCT PROFILE MODE DEMONSTRATIVE
 
@@ -260,3 +264,19 @@ int activeNodes;
 int board = 1;
 String message = "";
 bool messageReady = false;
+
+// *** GROWING SYSTEM VALUES ***
+
+// DHT21 SENSOR
+#define DHT_SENSOR_PIN 4 // Cualquier pin digital
+#define DHT_TYPE DHT21 // Definimos el modelo del sensor
+
+DHT dhtSensor(DHT_SENSOR_PIN, DHT_TYPE); // Instancia del objeto sensor 
+
+// LED STRIP
+#define PIN_STRIP_LED 1 // Analógica
+#define INITIAL_BRIGHTNESS 30
+
+// FAN
+#define PIN_FAN 1 // Analógica
+#define INITIAL_FAN_VALUE 30

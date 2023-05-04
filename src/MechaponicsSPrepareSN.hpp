@@ -29,7 +29,6 @@ void initPrepareSN()
     initMixer();
     initSubmersiblePump();
 
-    // PH, CE, temperature tests
     initCESensor();
     initPHSensor();
     initTemperatureSensor();
@@ -138,5 +137,4 @@ void prepareSN()
     readNode1VariablesSN();
 
     Serial.println("Solución preparada");
-    delayWithMillisMecha(120000); // Repeat process every 15 minutes (900000)
 }
