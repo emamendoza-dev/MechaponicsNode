@@ -370,6 +370,11 @@ void prepareOutputsFuzzyControl(int signalOutputAmplifier)
         g_fisOutput[0] = 0.0;
         g_fisOutput[1] = 0.0;
     }
+
+    // g_fisInput[0] = targetPH - realPH; // e
+    if(g_fisInput[0] > 0) {g_fisOutput[0] = 0.0;} // LA SOLUCIÓN ES MÁS ÁCIDA DE LO ESPERADO -> NO AGREGA ACIDO
+    if(g_fisInput[0] < 0) {g_fisOutput[1] = 0.0;} // LA SOLUCIÓN ES MÁS BASE DE LO ESPERADO -> NO AGREGA BASE
+
 }
 
 // This function prints the final results of Fuzzy Controller
@@ -398,6 +403,6 @@ void printFuzzyControlResults()
 bool is_pH_CE_Error(float permisibleErrorpH, float permisibleErrorCE)
 {
     Serial.print("Error en pH o CE");
-    Serial.println(abs(g_fisInput[0]) >= permisibleErrorpH || abs(g_fisInput[1]) >= permisibleErrorCE);
-    return (abs(g_fisInput[0]) >= permisibleErrorpH || abs(g_fisInput[1]) >= permisibleErrorCE);
+    Serial.println(abs(g_fisInput[0]) >= permisibleErrorpH || ( abs(g_fisInput[1]) >= permisibleErrorCE && g_fisInput[1] > 0 ));
+    return (abs(g_fisInput[0]) >= permisibleErrorpH || ( abs(g_fisInput[1]) >= permisibleErrorCE && g_fisInput[1] > 0 ));
 }

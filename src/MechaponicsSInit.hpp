@@ -7,16 +7,17 @@
 #include "MechaponicsSUART.hpp"
 #include "MechaponicsSOLED.hpp"
 #include "MechaponicsSModeDemonstrative.hpp"
-#include "MechaponicsSCultivate.hpp"
+//#include "MechaponicsSCultivate.hpp"
 // #include "MechaponicsSMicroSD.hpp"
 
 Scheduler firebaseSchedulerState;
 
-Task TaskFirebaseState(10000, TASK_FOREVER, &readStateMechaSystem);
-Task TaskFirebaseStateNodes(10000, TASK_FOREVER, &readStateNodesMechaSystem);
-Task TaskFirebasePerfil(15000, TASK_FOREVER, &readPerfilMechaSystem);
-Task TaskOLEDParameters(20000, TASK_FOREVER, &showParametersOLED);
-Task TaskIrrigationSN(TASK_MINUTE * 1, TASK_FOREVER, &irrigateSN);
+Task TaskFirebaseState(TASK_HOUR * 1, TASK_FOREVER, &readStateMechaSystem);
+Task TaskFirebaseStateNodes(TASK_HOUR * 1, TASK_FOREVER, &readStateNodesMechaSystem);
+Task TaskFirebasePerfil(TASK_HOUR * 1, TASK_FOREVER, &readPerfilMechaSystem);
+Task TaskOLEDParameters(TASK_MINUTE * 10, TASK_FOREVER, &showParametersOLED);
+Task TaskIrrigationSN(TASK_MINUTE * 5, TASK_FOREVER, &irrigateSN);
+Task TaskWriteDBNodeSN(TASK_MINUTE * 10, TASK_FOREVER, &writeFirebaseBD);
 
 void initMechaponicsSystem()
 {
@@ -54,6 +55,7 @@ void connectionWiFiOrServer()
         firebaseSchedulerState.addTask(TaskOLEDParameters);
         firebaseSchedulerState.addTask(TaskFirebaseStateNodes);
         firebaseSchedulerState.addTask(TaskIrrigationSN);
+        firebaseSchedulerState.addTask(TaskWriteDBNodeSN);
 
 
         TaskFirebaseState.enable();
@@ -61,6 +63,7 @@ void connectionWiFiOrServer()
         TaskOLEDParameters.enable();
         TaskFirebaseStateNodes.enable();
         TaskIrrigationSN.disable();
+        TaskWriteDBNodeSN.enable();
 
         initPrepareSN();
     }

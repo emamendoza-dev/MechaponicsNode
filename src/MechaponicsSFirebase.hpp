@@ -215,6 +215,7 @@ void readStateMechaSystem(){
   else
   {
     MostrarError();
+    modeOperatingSystem = 0;
   }
 }
 
@@ -283,6 +284,7 @@ void readPerfilMechaSystem()
   }
   else
   {
+    cProfileSN.valpHProfileSN = 5.75;
     MostrarError();
   }
   if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/CE"))
@@ -292,6 +294,7 @@ void readPerfilMechaSystem()
   }
   else
   {
+    cProfileSN.valECProfileSN = 2000;
     MostrarError();
   }
   if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/Temp"))

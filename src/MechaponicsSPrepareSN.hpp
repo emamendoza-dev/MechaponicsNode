@@ -84,10 +84,12 @@ void prepareSN()
     //float desiredPH = 5.75;
     float desiredPH = cProfileSN.valpHProfileSN;
     //float desiredCE = 2000.0;
-    float desiredCE = cProfileSN.valECProfileSN;
+    float adjustementCE = 200.0;
+    float desiredCE = cProfileSN.valECProfileSN - adjustementCE;
+
 
     // Permissible pH and CE errors
-    float pHPermissibleError = 0.1;
+    float pHPermissibleError = 0.2;
     float CEPermissibleError = 30.0;
 
     // Measure pH and CE of SN

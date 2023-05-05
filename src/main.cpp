@@ -41,10 +41,6 @@ void loop()
 
     readNode1VariablesSN();
 
-    writeFirebaseBD();
-
-    showParametersOLED();
-
     break;
   case 1:
     Serial.println("Modo de operación demostrativo");
