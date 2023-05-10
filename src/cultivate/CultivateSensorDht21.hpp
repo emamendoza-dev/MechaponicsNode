@@ -4,7 +4,7 @@ void initDht21Sensor() {
 
 float measureHumidityGrowingCell() {
     float h = dhtSensor.readHumidity(); // %HR
-    if(isnan(h));
+    if(isnan(h))
         Serial.println("Falló la medición de humedad del sensor DHT21");
 
     Serial.print("Humidity: ");
@@ -15,7 +15,7 @@ float measureHumidityGrowingCell() {
 
 float measureTemperatureGrowingCell() {
     float t = dhtSensor.readTemperature(); // °C
-    if(isnan(t));
+    if(isnan(t))
         Serial.println("Falló la medición de temperatura del sensor DHT21");
 
     Serial.print("Temperature: ");

@@ -55,7 +55,7 @@ void readNode1VariablesSN(){
     dBaseVarSN.dbNode1LevelSN = measureLevelSN();
     dBaseVarSN.dbNode1LevelSA = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SA));
     dBaseVarSN.dbNode1LevelSB = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SB));
-    dBaseVarSN.dbNode1LevelSNM = conversionLevelContainers(digitalRead(SENSOR_LEVEL_SNM));
+    dBaseVarSN.dbNode1LevelSNM = conversionLevelContainers(!digitalRead(SENSOR_LEVEL_SNM));
     Serial.print("Temp (°C): ");
     Serial.println(dBaseVarSN.dbNode1Temp);
     Serial.print("pH: ");
@@ -84,7 +84,7 @@ void prepareSN()
     //float desiredPH = 5.75;
     float desiredPH = cProfileSN.valpHProfileSN;
     //float desiredCE = 2000.0;
-    float adjustementCE = 200.0;
+    float adjustementCE = 500.0;
     float desiredCE = cProfileSN.valECProfileSN - adjustementCE;
 
 

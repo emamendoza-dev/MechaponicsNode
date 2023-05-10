@@ -16,7 +16,8 @@
 #include <OneWire.h>                
 #include <DallasTemperature.h>
 #include <TaskScheduler.h>
-// #include "DHT.h"
+#include <Adafruit_Sensor.h>
+#include "DHT.h"
 
 // FUZZY CONTROL DEFINITIONS
 #define FIS_TYPE float
@@ -264,21 +265,30 @@ int activeNodes;
 int board = 1;
 String message = "";
 bool messageReady = false;
-/*
+
 
 // *** GROWING SYSTEM VALUES ***
 
 // DHT21 SENSOR
-#define DHT_SENSOR_PIN 4 // Cualquier pin digital
+#define DHT_SENSOR_PIN 33 // Cualquier pin digital
 #define DHT_TYPE DHT21 // Definimos el modelo del sensor
 
 DHT dhtSensor(DHT_SENSOR_PIN, DHT_TYPE); // Instancia del objeto sensor 
 
 // LED STRIP
-#define PIN_STRIP_LED 1 // Analógica
-#define INITIAL_BRIGHTNESS 30
+#define PIN_STRIP_LED 27 // Analógica
+#define BRIGHTNESS 255
+//#define PERIOD_ON 57600000 // 16 horas
+//#define PERIOD_OFF 28800000 // 8 horas
+#define PERIOD_ON 60000 // 
+#define PERIOD_OFF 30000 // 
 
 // FAN
-#define PIN_FAN 1 // Analógica
-#define INITIAL_FAN_VALUE 30
-*/
+#define PIN_FAN 0 // Analógica 
+#define FAN_VALUE 50 // En 45 se empieza a mover
+
+// GetTime
+#define NTP_SERVER "pool.ntp.org"
+#define GMT_OFFSET_SEC -21600
+#define DAYLIGHT_OFFSET_SEC 0
+
