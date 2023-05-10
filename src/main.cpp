@@ -15,7 +15,7 @@ void loop()
   writeUART();
   switch (modeOperatingSystem)
   {
-  case 0:
+  case MODE_AUTOMATIC_VALUE:
     Serial.println("Modo de operación automatico");
     
     Serial.println(F("Loading configuration..."));
@@ -42,7 +42,7 @@ void loop()
     readNode1VariablesSN();
 
     break;
-  case 1:
+  case MODE_DEMOSTRATIVE_VALUE:
     Serial.println("Modo de operación demostrativo");
     readTestingModeDemonstrative();
     if (cProfileDemonostrative.dispensers)

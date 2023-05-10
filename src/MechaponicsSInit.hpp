@@ -7,7 +7,6 @@
 #include "MechaponicsSUART.hpp"
 #include "MechaponicsSOLED.hpp"
 #include "MechaponicsSModeDemonstrative.hpp"
-//#include "MechaponicsSCultivate.hpp"
 // #include "MechaponicsSMicroSD.hpp"
 
 Scheduler firebaseSchedulerState;
@@ -64,8 +63,6 @@ void connectionWiFiOrServer()
         TaskFirebaseStateNodes.enable();
         TaskIrrigationSN.disable();
         TaskWriteDBNodeSN.enable();
-
-        initPrepareSN();
     }
     else
     {

@@ -297,33 +297,6 @@ void readPerfilMechaSystem()
     cProfileSN.valECProfileSN = 2000;
     MostrarError();
   }
-  if (Firebase.getFloat(firebaseData, pathS + pathPerfilMechaSystem + "/Temp"))
-  {
-    cProfileCC.valTemProfileCC = firebaseData.to<float>();
-    InformacionGet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  if (Firebase.getInt(firebaseData, pathS + pathPerfilMechaSystem + "/Hum"))
-  {
-    cProfileCC.valHumProfileCC = firebaseData.to<int>();
-    InformacionGet();
-  }
-  else
-  {
-    MostrarError();
-  }
-  if (Firebase.getInt(firebaseData, pathS + pathPerfilMechaSystem + "/Lum"))
-  {
-    cProfileCC.valLumProfileCC = firebaseData.to<int>();
-    InformacionGet();
-  }
-  else
-  {
-    MostrarError();
-  }
   // Create configuration file
   Serial.println(F("Saving configuration..."));
   saveConfiguration(PATH_SD_PROFILE_SN, cProfileSN);

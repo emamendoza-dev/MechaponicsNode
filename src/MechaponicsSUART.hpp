@@ -18,9 +18,6 @@ void writeUART()
 
     doc["board_status"] = i+1;
     doc["modeO_status"] = modeOperatingSystem;
-    doc["n2Temp_status"] = cProfileCC.valTemProfileCC;
-    doc["n2Hum_status"] = cProfileCC.valHumProfileCC;
-    doc["n2Lum_status"] = cProfileCC.valLumProfileCC;
 
     serializeJson(doc, Serial1);
   }

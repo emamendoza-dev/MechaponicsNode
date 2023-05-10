@@ -16,7 +16,6 @@
 #include <OneWire.h>                
 #include <DallasTemperature.h>
 #include <TaskScheduler.h>
-// #include "DHT.h"
 
 // FUZZY CONTROL DEFINITIONS
 #define FIS_TYPE float
@@ -246,16 +245,6 @@ struct DataBaseVariablesSN {
 
 DataBaseVariablesSN dBaseVarSN;
 
-// STRUCT CONFIGURATION PROFILE CC
-
-struct ConfigProfileCC {
- float valTemProfileCC;
- int valHumProfileCC;
- int valLumProfileCC;
-};
-
-ConfigProfileCC cProfileCC;
-
 // VARIABLE FOR ACTIVE NODES MECHA SYSTEM
 
 int activeNodes;
@@ -264,21 +253,3 @@ int activeNodes;
 int board = 1;
 String message = "";
 bool messageReady = false;
-/*
-
-// *** GROWING SYSTEM VALUES ***
-
-// DHT21 SENSOR
-#define DHT_SENSOR_PIN 4 // Cualquier pin digital
-#define DHT_TYPE DHT21 // Definimos el modelo del sensor
-
-DHT dhtSensor(DHT_SENSOR_PIN, DHT_TYPE); // Instancia del objeto sensor 
-
-// LED STRIP
-#define PIN_STRIP_LED 1 // Analógica
-#define INITIAL_BRIGHTNESS 30
-
-// FAN
-#define PIN_FAN 1 // Analógica
-#define INITIAL_FAN_VALUE 30
-*/
