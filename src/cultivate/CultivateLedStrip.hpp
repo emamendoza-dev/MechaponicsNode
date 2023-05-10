@@ -1,7 +1,7 @@
 
 void initLightIntensity() {
     pinMode(PIN_STRIP_LED, OUTPUT);
-    analogWrite(PIN_STRIP_LED, BRIGHTNESS);
+    analogWrite(PIN_STRIP_LED, 255);
 }
 
 void turnOnLighting(int brightness){

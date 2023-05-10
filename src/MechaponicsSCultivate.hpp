@@ -2,15 +2,103 @@
 #include "cultivate/CultivateSensorDht21.hpp"
 #include "cultivate/CultivateFan.hpp"
 #include "cultivate/CultivateGetTime.hpp"
+#include "cultivate/CultiveLoadProfile.hpp"
 
-void initCultivate(){
+void initCultivate()
+{
     initDht21Sensor();
     initLightIntensity();
     initFan();
     initGetTime();
+    initLoadProfile();
 }
 
-void cultivate() {
-    // Encender luz por 16 horas(57600000) y apagar durante 8 horas (28800000 ms)
+void setLighting(int brightnessCultivateC)
+{
+    // GET THE TIME
+    int hourCultivateC = getHour();
+    // int minuteCultiveC = getMinute();
+    Serial.print("La hora es ");
+    Serial.println(hourCultivateC);
+    // Serial.print("Minuto: ");
+    // Serial.println(minuteCultiveC);
 
+    Serial.println("Valor de iluminacion");
+    Serial.println(brightnessCultivateC);
+
+    // ILLUMINATION FOR 16 HOURS
+    if (hourCultivateC >= 22 || hourCultivateC < 7)
+    {
+        // if((minuteCultiveC>10 && minuteCultiveC<15) || (minuteCultiveC>20 && miminuteCultiveC <25) || (minuteCultiveC>30 && minuteCultiveC<35) || (minuteCultiveC>40 && minuteCultiveC<45) || (minuteCultiveC>50 && minuteCultiveC<55)) {
+        turnOffLighting();
+        Serial.println("Luz apagada");
+    }
+    else
+    {
+        turnOnLighting(brightnessCultivateC);
+        Serial.println("Luz encendida");
+    }
+}
+
+void establishAcclimatization(float desiredTemperature){
+    // Measure variables
+    float humidityCell = measureHumidityGrowingCell();
+    delayWithMillisMecha(1000);
+    float temperatureCell = measureTemperatureGrowingCell();
+    delayWithMillisMecha(1000);
+    Serial.print("HR [%]: ");
+    Serial.println(humidityCell);
+    Serial.print("Temperatura [°C]: ");
+    Serial.println(temperatureCell);
+
+    // Desired temperature
+    Serial.print("Temperatura deseada[°C]: ");
+    Serial.println(desiredTemperature);
+    // Error
+    float temperatureError;
+    temperatureError = desiredTemperature - temperatureCell;
+    Serial.print("Error en la temperatura [°C]: ");
+    Serial.println(temperatureError);
+    // Control
+    if (temperatureError > 0)
+    {
+      velocityFan--;
+      Serial.print("Velocidad del ventilador reduce a ");
+    }
+    else if (temperatureError < 0)
+    {
+      velocityFan++;
+      Serial.print("Velocidad del ventilador aumenta a ");
+    }
+    if (velocityFan < 0)
+      velocityFan = 0;
+    if (velocityFan > 255)
+      velocityFan = 255;
+    Serial.println(velocityFan);
+    // Actuador
+    changeVelocityFan(velocityFan);
+}
+
+void readNode2VariablesCC(){
+    // Measure variables
+    dBaseVarCC.dbNode2Hum = measureHumidityGrowingCell();
+    delayWithMillisMecha(1000);
+    dBaseVarCC.dbNode2Temp = measureTemperatureGrowingCell();
+    delayWithMillisMecha(1000);
+    dBaseVarCC.dbNode2Lum = map(cProfileCC.valLumProfileCC, 0, 255, 0, 100);
+    dBaseVarCC.dbNode2Irri = 3;
+
+    Serial.print("HR [%]: ");
+    Serial.println(dBaseVarCC.dbNode2Hum);
+    Serial.print("Temperatura [°C]: ");
+    Serial.println(dBaseVarCC.dbNode2Temp);
+    Serial.print("Luminosidad: ");
+    Serial.println(dBaseVarCC.dbNode2Lum);
+}
+
+void prepareCC()
+{
+    setLighting(cProfileCC.valLumProfileCC);
+
+    establishAcclimatization(cProfileCC.valTemProfileCC);
 }

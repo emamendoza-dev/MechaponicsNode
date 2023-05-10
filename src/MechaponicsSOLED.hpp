@@ -12,24 +12,13 @@ void writeOLED(int xCursor, int yCursor, int textSize, String messageOLED)
 void showParametersOLED()
 {
   OLED_DISPLAY.clearDisplay();
-  writeOLED(0, 13, 1, "SN pH Ctrl: "+ String(cProfileSN.valpHProfileSN));
-  writeOLED(10, 28, 0, "MS-Node 1");
+  writeOLED(0, 13, 1, "CC Temp Ctrl: "+ String(cProfileCC.valTemProfileCC));
   delayWithMillisMecha(2000);
   OLED_DISPLAY.clearDisplay();
-  writeOLED(0, 13, 1, "SN EC Ctrl: "+ String(cProfileSN.valECProfileSN));
-  writeOLED(10, 28, 0, "MS-Node 1");
+  writeOLED(0, 13, 1, "CC Hum Ctrl: "+ String(cProfileCC.valHumProfileCC));
   delayWithMillisMecha(2000);
   OLED_DISPLAY.clearDisplay();
-  writeOLED(0, 13, 1, "SN pH Val: "+ String(dBaseVarSN.dbNode1pH));
-  writeOLED(10, 28, 0, "MS-Node 1");
-  delayWithMillisMecha(2000);
-  OLED_DISPLAY.clearDisplay();
-  writeOLED(0, 13, 1, "SN EC Val: "+ String(dBaseVarSN.dbNode1EC));
-  writeOLED(10, 28, 0, "MS-Node 1");
-  delayWithMillisMecha(2000);
-  OLED_DISPLAY.clearDisplay();
-  writeOLED(0, 13, 1, "SN Temp Val: "+ String(dBaseVarSN.dbNode1Temp));
-  writeOLED(10, 28, 0, "MS-Node 1");
+  writeOLED(0, 13, 1, "CC Lum Val: "+ String(cProfileCC.valLumProfileCC));
   delayWithMillisMecha(2000);
 }
 
