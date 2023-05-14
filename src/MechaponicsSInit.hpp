@@ -1,5 +1,6 @@
 #include "MechaponicsSConfig.hpp"
 #include "MechaponicsSTime.hpp"
+#include "MechaponicsSTask.hpp"
 #include "MechaponicsSPrepareSN.hpp"
 #include "MechaponicsSSPIFFS.hpp"
 #include "MechaponicsSWiFiManager.hpp"
@@ -8,15 +9,6 @@
 #include "MechaponicsSOLED.hpp"
 #include "MechaponicsSModeDemonstrative.hpp"
 // #include "MechaponicsSMicroSD.hpp"
-
-Scheduler firebaseSchedulerState;
-
-Task TaskFirebaseState(TASK_HOUR * 1, TASK_FOREVER, &readStateMechaSystem);
-Task TaskFirebaseStateNodes(TASK_HOUR * 1, TASK_FOREVER, &readStateNodesMechaSystem);
-Task TaskFirebasePerfil(TASK_HOUR * 1, TASK_FOREVER, &readPerfilMechaSystem);
-Task TaskOLEDParameters(TASK_MINUTE * 10, TASK_FOREVER, &showParametersOLED);
-Task TaskIrrigationSN(TASK_MINUTE * 5, TASK_FOREVER, &irrigateSN);
-Task TaskWriteDBNodeSN(TASK_MINUTE * 10, TASK_FOREVER, &writeFirebaseBD);
 
 void initMechaponicsSystem()
 {
@@ -49,25 +41,24 @@ void connectionWiFiOrServer()
 
         readStateMechaSystem();
 
-        firebaseSchedulerState.addTask(TaskFirebaseState);
-        firebaseSchedulerState.addTask(TaskFirebasePerfil);
-        firebaseSchedulerState.addTask(TaskOLEDParameters);
-        firebaseSchedulerState.addTask(TaskFirebaseStateNodes);
-        firebaseSchedulerState.addTask(TaskIrrigationSN);
-        firebaseSchedulerState.addTask(TaskWriteDBNodeSN);
-
-
-        TaskFirebaseState.enable();
-        TaskFirebasePerfil.enable();
-        TaskOLEDParameters.enable();
-        TaskFirebaseStateNodes.enable();
-        TaskIrrigationSN.disable();
-        TaskWriteDBNodeSN.enable();
+        enableMechaSystemTask();
     }
     else
     {
         // Conexión con el punto de acceso
         connectWiFiServer();
     }
-    
+}
+
+void loadProfileMechaSystem()
+{
+    Serial.println(F("Loading configuration..."));
+    loadConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
+
+    // Dump config file
+    Serial.println(F("Print config file..."));
+    printFile(PATH_SD_PROFILE_SN);
+
+    Serial.println(cProfileSN.valpHProfileSN);
+    Serial.println(cProfileSN.valECProfileSN);
 }

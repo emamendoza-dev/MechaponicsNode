@@ -100,6 +100,7 @@ void prepareSN()
 
 
     while(is_pH_CE_Error(pHPermissibleError, CEPermissibleError)){
+        TaskIrrigationSN.disable();
         // Apply fuzzy control
         fis_evaluate();
 
@@ -133,6 +134,9 @@ void prepareSN()
         // Calculates pH and CE error (inputs of controller) and adjust it to fuzzy control intervals established
         prepareInputsFuzzyControl(desiredPH, desiredCE, PHLevel, CELevel);
     }
+
+    if (!(is_pH_CE_Error(pHPermissibleError, CEPermissibleError)))
+        TaskIrrigationSN.enable();
 
     delayWithMillisMecha(20000);
 

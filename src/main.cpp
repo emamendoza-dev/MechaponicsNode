@@ -18,26 +18,12 @@ void loop()
   case MODE_AUTOMATIC_VALUE:
     Serial.println("Modo de operación automatico");
     
-    Serial.println(F("Loading configuration..."));
-    loadConfiguration(PATH_SD_PROFILE_SN, cProfileSN);
+    loadProfileMechaSystem();
 
-    // Dump config file
-    Serial.println(F("Print config file..."));
-    printFile(PATH_SD_PROFILE_SN);
-
-    Serial.println(cProfileSN.valpHProfileSN);
-    Serial.println(cProfileSN.valECProfileSN);
-
-    TaskIrrigationSN.disable();
     prepareSN();
-    TaskIrrigationSN.enable();
 
     while(isLowSNLevel())
         fillTankSN();
-
-    mixer(15000);
-
-    delayWithMillisMecha(5000);
 
     readNode1VariablesSN();
 
