@@ -14,7 +14,13 @@ int measureLevelSN()
   sLevelSN.timeDelayEcho = pulseIn(SENSOR_LEVEL_SN_ECHO, HIGH);
   sLevelSN.distanceEquivalent = sLevelSN.timeDelayEcho / 59;
 
-  sLevelSN.levelPercentageTank = ((LEVEL_TANK_SN_MAX - (sLevelSN.distanceEquivalent - LEVEL_TANK_SN_OFFSET)) * 100) / LEVEL_TANK_SN_MAX;
+  int levelPercentageT = ((LEVEL_TANK_SN_MAX - (sLevelSN.distanceEquivalent - LEVEL_TANK_SN_OFFSET)) * 100) / LEVEL_TANK_SN_MAX;
+
+  if ( levelPercentageT < 0 || levelPercentageT > 100 ){
+    sLevelSN.levelPercentageTank = 100;
+  }else{
+    sLevelSN.levelPercentageTank = levelPercentageT;
+  }
 
   return sLevelSN.levelPercentageTank;
 }
