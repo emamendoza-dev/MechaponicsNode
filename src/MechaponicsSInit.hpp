@@ -14,8 +14,8 @@ Scheduler firebaseSchedulerState;
 Task TaskFirebaseState(TASK_HOUR * 1, TASK_FOREVER, &readStateMechaSystem);
 Task TaskFirebaseStateNodes(TASK_HOUR * 1, TASK_FOREVER, &readStateNodesMechaSystem);
 Task TaskFirebasePerfil(TASK_HOUR * 1, TASK_FOREVER, &readPerfilMechaSystem);
-Task TaskOLEDParameters(TASK_MINUTE * 10, TASK_FOREVER, &showParametersOLED);
-Task TaskWriteDBNodeSN(TASK_MINUTE * 10, TASK_FOREVER, &writeFirebaseBD);
+Task TaskOLEDParameters(TASK_MINUTE * 1, TASK_FOREVER, &showParametersOLED);
+Task TaskWriteDBNodeSN(TASK_MINUTE * 20, TASK_FOREVER, &writeFirebaseBD);
 
 void initMechaponicsSystem()
 {

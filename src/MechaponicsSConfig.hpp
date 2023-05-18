@@ -26,7 +26,7 @@
 DHT dhtSensor(DHT_SENSOR_PIN, DHT_TYPE); // Instancia del objeto sensor 
 
 // LED STRIP
-#define PIN_STRIP_LED 27 // Analógica
+#define PIN_STRIP_LED 26 // Analógica
 //#define PERIOD_ON 57600000 // 16 horas
 //#define PERIOD_OFF 28800000 // 8 horas
 #define PERIOD_ON 60000 // 
@@ -95,12 +95,16 @@ String pathS = "/MechaponicsSystem";
 String pathStateMechaSystem = "/Estado";
 String pathPerfilMechaSystem = "/Perfil";
 String pathN = "/Nodo2";
+//String pathN = "/Nodo3";
 String pathNodes = "/Nodos";
 
 // MICRO SD PATHS 
 
 #define PATH_SD_PROFILE_CC "/profile/node2_profile.txt"
 #define PATH_SD_DATALOG_CC "/datalog/node2_datalog.txt"
+
+//#define PATH_SD_PROFILE_CC "/profile/node3_profile.txt"
+//#define PATH_SD_DATALOG_CC "/datalog/node3_datalog.txt"
 
 // OPERATING MODE VARIABLES
 
@@ -152,6 +156,6 @@ ConfigProfileCC cProfileCC;
 int activeNodes;
 
 // Variables a transmitir vía UART
-int board = 1;
+int board = 2;
 String message = "";
 bool messageReady = false;
