@@ -116,9 +116,9 @@ int modeOperatingSystem = 0;
 // STRUCT PROFILE MODE DEMONSTRATIVE
 
 struct ConfigProfileDemonostrative {
- bool dispensers;
+ bool temperature;
+ bool humidity;
  bool measures;
- bool solution;
 };
 
 ConfigProfileDemonostrative cProfileDemonostrative;

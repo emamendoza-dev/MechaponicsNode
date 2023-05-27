@@ -6,3 +6,7 @@ void initFan() {
 void changeVelocityFan(int velocity){
     analogWrite(PIN_FAN, velocity);
 }
+
+void turnOffFan(){
+    analogWrite(PIN_FAN, 0);
+}

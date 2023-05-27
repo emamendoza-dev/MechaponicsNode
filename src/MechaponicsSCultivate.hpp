@@ -17,11 +17,8 @@ void setLighting(int brightnessCultivateC)
 {
     // GET THE TIME
     int hourCultivateC = getHour();
-    // int minuteCultiveC = getMinute();
     Serial.print("La hora es ");
     Serial.println(hourCultivateC);
-    // Serial.print("Minuto: ");
-    // Serial.println(minuteCultiveC);
 
     Serial.println("Valor de iluminacion");
     Serial.println(brightnessCultivateC);
@@ -29,13 +26,14 @@ void setLighting(int brightnessCultivateC)
     // ILLUMINATION FOR 16 HOURS
     if (hourCultivateC >= 22 || hourCultivateC < 7)
     {
-        // if((minuteCultiveC>10 && minuteCultiveC<15) || (minuteCultiveC>20 && miminuteCultiveC <25) || (minuteCultiveC>30 && minuteCultiveC<35) || (minuteCultiveC>40 && minuteCultiveC<45) || (minuteCultiveC>50 && minuteCultiveC<55)) {
         turnOffLighting();
+        changeVelocityFan(60);
         Serial.println("Luz apagada");
     }
     else
     {
         turnOnLighting(brightnessCultivateC);
+        changeVelocityFan(255);
         Serial.println("Luz encendida");
     }
 }
@@ -92,7 +90,7 @@ void readNode2VariablesCC(){
     Serial.println(dBaseVarCC.dbNode2Hum);
     Serial.print("Temperatura [°C]: ");
     Serial.println(dBaseVarCC.dbNode2Temp);
-    Serial.print("Luminosidad: ");
+    Serial.print("LuminsetLightingosidad: ");
     Serial.println(dBaseVarCC.dbNode2Lum);
 }
 
@@ -100,5 +98,5 @@ void prepareCC()
 {
     setLighting(cProfileCC.valLumProfileCC);
 
-    establishAcclimatization(cProfileCC.valTemProfileCC);
+    // establishAcclimatization(cProfileCC.valTemProfileCC);
 }
