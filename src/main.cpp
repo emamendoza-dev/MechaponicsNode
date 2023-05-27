@@ -46,6 +46,7 @@ void loop()
     if (cProfileDemonostrative.irrigation)
     {
       irrigateSN();
+      delayWithMillisMecha(20000);
     }
     delayWithMillisMecha(1000);
     break;

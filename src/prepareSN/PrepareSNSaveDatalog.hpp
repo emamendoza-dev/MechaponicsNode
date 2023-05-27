@@ -1,68 +1,37 @@
-struct StatusParametersSN {
- float valpHSN;
- float valCESN;
- float valTempSN;
- int valLevelSA;
- int valLevelSB;
- int valLevelSNM;
-};
-
-StatusParametersSN sParametersSN;
-
-void loadParametersSN(const char *filename, StatusParametersSN &sParametersSN) {
-  File file = SD.open(filename);
-
-  StaticJsonDocument<200> doc;
-  DeserializationError error = deserializeJson(doc, file);
-  if (error)
-    Serial.println(F("Failed to read file, using default configuration"));
-
-  sParametersSN.valpHSN = doc["valpHSN"];
-  sParametersSN.valCESN = doc["valCESN"];
-  sParametersSN.valTempSN = doc["valTempSN"];
-  sParametersSN.valLevelSA = doc["valLevelSA"];
-  sParametersSN.valLevelSB = doc["valLevelSB"];
-  sParametersSN.valLevelSNM = doc["valLevelSNM"];
-
-  file.close();
-}
-
-void saveParametersSN(const char *filename, const StatusParametersSN &sParametersSN) {
-  SD.remove(filename);
-
-  File file = SD.open(filename, FILE_WRITE);
-  if (!file) {
+void saveDatalog(const char *filename, const DataBaseVariablesSN &dBaseVarSN)
+{
+  File file = SD.open(filename, FILE_APPEND);
+  if (!file)
+  {
     Serial.println(F("Failed to create file"));
     return;
   }
 
-  StaticJsonDocument<100> doc;
+  StaticJsonDocument<300> doc;
 
-  doc["valpHSN"] = sParametersSN.valpHSN;
-  doc["valCESN"] = sParametersSN.valCESN;
-  doc["valTempSN"] = sParametersSN.valTempSN;
-  doc["valLevelSA"] = sParametersSN.valLevelSA;
-  doc["valLevelSB"] = sParametersSN.valLevelSB;
-  doc["valLevelSNM"] = sParametersSN.valLevelSNM;
+  doc["valpHDataLogCC"] = dBaseVarSN.dbNode1pH;
+  doc["valECDataLogCC"] = dBaseVarSN.dbNode1EC;
+  doc["valTempDataLogCC"] = dBaseVarSN.dbNode1Temp;
+  doc["valLevelSNDataLogCC"] = dBaseVarSN.dbNode1LevelSN;
+  doc["valLevelSADataLogCC"] = dBaseVarSN.dbNode1LevelSA;
+  doc["valLevelSBDataLogCC"] = dBaseVarSN.dbNode1LevelSB;
+  doc["valLevelSNMDataLogCC"] = dBaseVarSN.dbNode1LevelSNM;
 
-  if (serializeJson(doc, file) == 0) {
+  if (serializeJson(doc, file) == 0)
+  {
     Serial.println(F("Failed to write to file"));
   }
 
   file.close();
 }
 
-void printFile(const char *filename) {
-  File file = SD.open(filename);
-  if (!file) {
-    Serial.println(F("Failed to read file"));
-    return;
-  }
+void saveMechaSystemDatalog()
+{
+  Serial.println(F("Saving datalog..."));
   
-  while (file.available()) {
-    Serial.print((char)file.read());
-  }
-  Serial.println();
+  readNode1VariablesSN();
 
-  file.close();
+  saveDatalog(PATH_SD_DATALOG_SN, dBaseVarSN);
+  
+  printFile(PATH_SD_DATALOG_SN);
 }

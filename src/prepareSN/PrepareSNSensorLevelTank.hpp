@@ -16,6 +16,9 @@ int measureLevelSN()
 
   int levelPercentageT = ((LEVEL_TANK_SN_MAX - (sLevelSN.distanceEquivalent - LEVEL_TANK_SN_OFFSET)) * 100) / LEVEL_TANK_SN_MAX;
 
+  Serial.println("Nivel real solucion");
+  Serial.println(levelPercentageT);
+
   if ( levelPercentageT < 0 || levelPercentageT > 100 ){
     sLevelSN.levelPercentageTank = 100;
   }else{

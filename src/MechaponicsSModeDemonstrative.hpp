@@ -44,7 +44,7 @@ void readTestingModeDemonstrative()
 
 void modeDemonstrativeDispensers()
 {
-  mixer(15000);
+  mixer(5000);
 }
 
 void modeDemonstrativeMeasures()
