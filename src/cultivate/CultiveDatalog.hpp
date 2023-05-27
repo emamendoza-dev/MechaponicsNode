@@ -1,6 +1,6 @@
 void saveDatalog(const char *filename, const DataBaseVariablesCC &dBaseVarCC)
 {
-  SD.remove(filename);
+  //SD.remove(filename);
 
   File file = SD.open(filename, FILE_APPEND);
   if (!file)
@@ -14,7 +14,7 @@ void saveDatalog(const char *filename, const DataBaseVariablesCC &dBaseVarCC)
   doc["valTemDataLogCC"] = dBaseVarCC.dbNode2Temp;
   doc["valHumDataLogCC"] = dBaseVarCC.dbNode2Hum;
   doc["valLumDataLogCC"] = dBaseVarCC.dbNode2Lum;
-  doc["valLumDataLogCC"] = dBaseVarCC.dbNode2Irri;
+  doc["valIrriDataLogCC"] = dBaseVarCC.dbNode2Irri;
 
   if (serializeJson(doc, file) == 0)
   {
@@ -26,7 +26,7 @@ void saveDatalog(const char *filename, const DataBaseVariablesCC &dBaseVarCC)
 
 void saveMechaSystemDatalog()
 {
-  Serial.println(F("Loading datalog..."));
+  Serial.println(F("Saving datalog..."));
   
   readNode2VariablesCC();
 

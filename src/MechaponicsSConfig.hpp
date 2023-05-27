@@ -94,17 +94,17 @@ FirebaseData firebaseData;
 String pathS = "/MechaponicsSystem";
 String pathStateMechaSystem = "/Estado";
 String pathPerfilMechaSystem = "/Perfil";
-String pathN = "/Nodo2";
-//String pathN = "/Nodo3";
+//String pathN = "/Nodo2";
+String pathN = "/Nodo3";
 String pathNodes = "/Nodos";
 
 // MICRO SD PATHS 
 
-#define PATH_SD_PROFILE_CC "/profile/node2_profile.txt"
-#define PATH_SD_DATALOG_CC "/datalog/node2_datalog.txt"
+//#define PATH_SD_PROFILE_CC "/profile/node2_profile.txt"
+//#define PATH_SD_DATALOG_CC "/datalog/node2_datalog.txt"
 
-//#define PATH_SD_PROFILE_CC "/profile/node3_profile.txt"
-//#define PATH_SD_DATALOG_CC "/datalog/node3_datalog.txt"
+#define PATH_SD_PROFILE_CC "/profile/node3_profile.txt"
+#define PATH_SD_DATALOG_CC "/datalog/node3_datalog.txt"
 
 // OPERATING MODE VARIABLES
 
