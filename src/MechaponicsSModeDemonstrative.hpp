@@ -22,4 +22,33 @@ void readTestingModeDemonstrative()
   {
     MostrarError();
   }
+  if (Firebase.getFloat(firebaseData, pathS + pathStateMechaSystem + "/Solucion"))
+  {
+    cProfileDemonostrative.solution = firebaseData.to<bool>();
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+  if (Firebase.getFloat(firebaseData, pathS + pathStateMechaSystem + "/Irrigacion"))
+  {
+    cProfileDemonostrative.irrigation = firebaseData.to<bool>();
+    InformacionGet();
+  }
+  else
+  {
+    MostrarError();
+  }
+}
+
+void modeDemonstrativeDispensers()
+{
+  mixer(15000);
+}
+
+void modeDemonstrativeMeasures()
+{
+  readNode1VariablesSN();
+  writeFirebaseBD();
 }

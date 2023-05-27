@@ -220,6 +220,7 @@ struct ConfigProfileDemonostrative {
  bool dispensers;
  bool measures;
  bool solution;
+ bool irrigation;
 };
 
 ConfigProfileDemonostrative cProfileDemonostrative;

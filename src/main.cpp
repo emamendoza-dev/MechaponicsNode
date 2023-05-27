@@ -33,21 +33,19 @@ void loop()
     readTestingModeDemonstrative();
     if (cProfileDemonostrative.dispensers)
     {
-      Serial.println("Activando dosificadores");
+      modeDemonstrativeDispensers();
     }
     if (cProfileDemonostrative.measures)
     {
-      dBaseVarSN.dbNode1Temp = measureSNTemperature();
-      dBaseVarSN.dbNode1EC = measureLevelCEAveraged(temperatureSNCentigrade);
-      dBaseVarSN.dbNode1pH = measureAveragedPHLevel();
-      Serial.print("Temp (°C): ");
-      Serial.println(dBaseVarSN.dbNode1Temp);
-      Serial.print("pH: ");
-      Serial.println(dBaseVarSN.dbNode1pH);
-      Serial.print("CE (uS/cm): ");
-      Serial.println(dBaseVarSN.dbNode1EC);
-
-      writeFirebaseBD();
+      modeDemonstrativeMeasures();
+    }
+    if (cProfileDemonostrative.solution)
+    {
+      prepareSN();
+    }
+    if (cProfileDemonostrative.irrigation)
+    {
+      irrigateSN();
     }
     delayWithMillisMecha(1000);
     break;
