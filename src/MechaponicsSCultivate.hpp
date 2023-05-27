@@ -4,6 +4,7 @@
 #include "cultivate/CultivateGetTime.hpp"
 #include "cultivate/CultiveLoadProfile.hpp"
 
+
 void initCultivate()
 {
     initDht21Sensor();
@@ -100,3 +101,5 @@ void prepareCC()
 
     // establishAcclimatization(cProfileCC.valTemProfileCC);
 }
+
+#include "cultivate/CultiveDatalog.hpp"

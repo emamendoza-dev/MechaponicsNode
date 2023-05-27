@@ -16,6 +16,7 @@ Task TaskFirebaseStateNodes(TASK_HOUR * 1, TASK_FOREVER, &readStateNodesMechaSys
 Task TaskFirebasePerfil(TASK_MINUTE * 1, TASK_FOREVER, &readPerfilMechaSystem); //HORA
 Task TaskOLEDParameters(TASK_MINUTE * 1, TASK_FOREVER, &showParametersOLED);
 Task TaskWriteDBNodeSN(TASK_MINUTE * 2, TASK_FOREVER, &writeFirebaseBD); // 2 MINUTOS
+Task TaskWriteDatalogCC(TASK_SECOND * 20, TASK_FOREVER, &saveMechaSystemDatalog);
 
 void initMechaponicsSystem()
 {
